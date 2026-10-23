@@ -18,4 +18,4 @@ AIN 학습 로드맵의 **필수 수학** 영역을 위한 독립형 정적 페�
 2. 브랜치는 `main`, 폴더는 `/(root)`로 저장합니다.
 3. 배포 주소는 `https://yea-kasane-teto.github.io/AIN-sanghyo/`입니다.
 
-AIN 메인 페이지의 필수 수학 카드는 이 주소를 열도록 [초안 PR](https://github.com/yea-kasane-teto/AIN-main/pull/1)에 연결 변경을 올렸습니다. Pages를 켜고 PR을 병합하면 메인 카드에서 이 페이지로 이동합니다.
+AIN 메인 페이지의 필수 수학 카드는 이 주소를 열도록 [PR](https://github.com/yea-kasane-teto/AIN-main/pull/1)에 연결 변경을 올렸습니다. Pages를 켜고 PR을 병합하면 메인 카드에서 이 페이지로 이동합니다.
