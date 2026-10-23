@@ -1,4 +1,20 @@
 (() => {
+  const moduleRegistry = { math: '필수 수학' };
+  const requestedModule = new URLSearchParams(window.location.search).get('module') || 'math';
+  const pageRoot = document.querySelector('.learning-app');
+  const moduleTitle = moduleRegistry[requestedModule];
+
+  if (!moduleTitle) {
+    document.title = '학습 영역을 찾을 수 없어요 | AIN';
+    if (pageRoot) {
+      pageRoot.innerHTML = '<main class="not-found"><span class="eyebrow">AIN LEARNING AREA</span><h1>요청한 학습 영역을 찾을 수 없어요.</h1><p>주소의 module 값을 확인해 주세요.</p><a class="button button-primary" href="./?module=math">필수 수학으로 이동</a></main>';
+    }
+    return;
+  }
+
+  document.title = moduleTitle + ' | AIN';
+  document.documentElement.dataset.module = requestedModule;
+
   const byId = (id) => document.getElementById(id);
 
   const vectorInputs = ['vectorA1', 'vectorA2', 'vectorB1', 'vectorB2'].map(byId);
