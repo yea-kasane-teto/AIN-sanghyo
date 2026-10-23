@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f8fc" />
+    <meta name="description" content="AI를 이해하는 데 필요한 벡터, 행렬, 텐서, 미분의 기초를 배워보세요." />
+    <title>필수 수학 — AIN 학습 노트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Dodum&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar" id="sidebar" aria-label="학습 메뉴">
+        <a class="brand" href="#top" aria-label="AIN 필수 수학 홈">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <span class="brand-copy"><strong>AIN</strong><small>AI에 들어가다</small></span>
+        </a>
+        <div class="sidebar-label">학습 공간</div>
+        <a class="side-link" href="https://github.com/yea-kasane-teto/AIN-main" aria-label="AIN 메인 페이지 저장소로 이동"><span class="side-icon" aria-hidden="true">⌂</span><span>메인 페이지</span><span class="external-mark" aria-hidden="true">↗</span></a>
+        <a class="side-link is-active" href="#top" aria-current="page"><span class="side-icon" aria-hidden="true">∑</span><span>필수 수학</span></a>
+        <nav class="lesson-nav" aria-label="필수 수학 목차">
+          <a href="#linear-algebra"><span>01</span> 선형대수</a>
+          <a href="#tensors"><span>02</span> 행렬과 텐서</a>
+          <a href="#calculus"><span>03</span> 미분과 기울기</a>
+          <a href="#probability"><span>04</span> 확률 기초</a>
+        </nav>
+        <div class="sidebar-note"><span class="note-dot"></span><span>공식을 외우기보다, AI에서 어떻게 쓰이는지 살펴봐요.</span></div>
+        <div class="sidebar-bottom">처음이라도 괜찮아요.<br />한 개념씩 천천히 배워봐요.</div>
+      </aside>
+
+      <main class="main-area" id="top">
+        <header class="topbar">
+          <div class="breadcrumb"><a href="https://github.com/yea-kasane-teto/AIN-main">AIN</a><span class="crumb-divider">/</span><strong>필수 수학</strong></div>
+          <div class="topbar-caption"><span class="live-dot"></span> LEARNING NOTE <span class="caption-divider">·</span> 01 / 06</div>
+          <button class="icon-button menu-button" id="menuButton" type="button" aria-label="학습 목차 열기" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+        </header>
+
+        <div class="page-content">
+          <section class="hero" aria-labelledby="pageTitle">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="eyebrow-mark"></span> THE MATH BEHIND AI</div>
+              <p class="hero-index">02 <span>—</span> FOUNDATIONS</p>
+              <h1 id="pageTitle">필수 수학<span class="title-period">.</span></h1>
+              <p class="hero-description">AI는 데이터를 숫자로 표현하고, 그 숫자 사이의 관계를 계산해요.<br class="desktop-break" />그 계산의 언어인 벡터와 행렬, 미분의 감각부터 익혀봅시다.</p>
+              <a class="primary-button" href="#linear-algebra">첫 개념 시작하기 <span aria-hidden="true">↓</span></a>
+              <div class="hero-footnote"><span class="sparkle" aria-hidden="true">✦</span> 수식은 도구예요. 뜻을 먼저 이해하고 함께 써봐요.</div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="hero-orbit hero-orbit-one"></div><div class="hero-orbit hero-orbit-two"></div>
+              <span class="hero-visual-number">∑</span>
+              <div class="math-card">
+                <span class="math-card-kicker">A SMALL STEP INTO AI</span>
+                <span class="math-symbol">∇</span>
+                <span class="math-card-label">숫자로 관계를 읽기</span>
+                <span class="math-card-formula">y = Wx + b</span>
+              </div>
+              <span class="float-chip chip-one">벡터 <b>→</b></span>
+              <span class="float-chip chip-two">기울기 <b>∇</b></span>
+              <span class="float-chip chip-three">텐서 <b>▦</b></span>
+              <span class="art-sparkle sparkle-one">✳</span><span class="art-sparkle sparkle-two">✦</span>
+            </div>
+          </section>
+
+          <section class="welcome-row" aria-label="학습 내용 소개">
+            <div><span class="section-kicker">YOUR TOOLKIT</span><h2>AI를 읽는 네 가지 수학 도구</h2><p>필요한 순간에 어떤 수학이 등장하는지 연결해서 배워요.</p></div>
+            <div class="tool-tags" aria-label="학습 주제"><span>선형대수</span><span>텐서</span><span>미분</span><span>확률</span></div>
+          </section>
+
+          <section class="lesson-section" id="linear-algebra" aria-labelledby="linearTitle">
+            <div class="lesson-heading">
+              <div class="lesson-heading-main"><span class="lesson-number">01</span><div><span class="section-kicker">LINEAR ALGEBRA</span><h2 id="linearTitle">벡터는 방향과 크기를 함께 담아요</h2></div></div>
+              <span class="lesson-time">약 4분</span>
+            </div>
+            <div class="lesson-grid">
+              <article class="content-card concept-card">
+                <span class="card-label">핵심 개념</span>
+                <p>벡터는 여러 숫자를 순서대로 모은 값이에요. 두 숫자 <strong>(3, 2)</strong>는 오른쪽으로 3, 위로 2만큼 움직이는 화살표로 볼 수 있어요.</p>
+                <div class="formula-block"><span class="formula-caption">두 벡터의 내적</span><strong>a · b = a₁b₁ + a₂b₂</strong></div>
+                <p class="small-copy">내적은 두 벡터가 얼마나 같은 방향을 향하는지 나타내요. 추천 시스템에서는 사용자와 콘텐츠의 특징이 얼마나 비슷한지 계산할 때 활용할 수 있어요.</p>
+              </article>
+              <article class="content-card vector-card" aria-labelledby="vectorPlayTitle">
+                <div class="card-heading"><div><span class="card-label">직접 바꿔보기</span><h3 id="vectorPlayTitle">벡터 내적 실험</h3></div><span class="mini-badge">PLAY</span></div>
+                <div class="vector-inputs">
+                  <label class="vector-field field-a"><span>a =</span><input id="vectorA1" type="number" value="3" min="-9" max="9" step="1" aria-label="벡터 a의 첫 번째 성분" /><span>,</span><input id="vectorA2" type="number" value="2" min="-9" max="9" step="1" aria-label="벡터 a의 두 번째 성분" /><span>→</span></label>
+                  <label class="vector-field field-b"><span>b =</span><input id="vectorB1" type="number" value="1" min="-9" max="9" step="1" aria-label="벡터 b의 첫 번째 성분" /><span>,</span><input id="vectorB2" type="number" value="3" min="-9" max="9" step="1" aria-label="벡터 b의 두 번째 성분" /><span>→</span></label>
+                </div>
+                <div class="graph-wrap"><svg class="vector-graph" id="vectorGraph" viewBox="0 0 280 156" role="img" aria-label="두 벡터의 방향과 크기를 보여주는 좌표 평면"><defs><marker id="arrowA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#347ef2"></path></marker><marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#53b9a4"></path></marker></defs><g class="grid-lines"><path d="M22 78H258M140 12V146M60 74V82M100 74V82M180 74V82M220 74V82M136 38H144M136 118H144"></path></g><line id="lineA" class="vector-line vector-a" x1="140" y1="78" x2="140" y2="78" marker-end="url(#arrowA)"></line><line id="lineB" class="vector-line vector-b" x1="140" y1="78" x2="140" y2="78" marker-end="url(#arrowB)"></line><text id="labelA" class="vector-label label-a" x="146" y="72">a</text><text id="labelB" class="vector-label label-b" x="146" y="72">b</text></svg></div>
+                <div class="result-row"><span>내적 <strong id="dotResult">9</strong></span><span class="result-divider"></span><span>방향 <strong id="directionResult">비슷해요</strong></span></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="lesson-section" id="tensors" aria-labelledby="tensorTitle">
+            <div class="lesson-heading">
+              <div class="lesson-heading-main"><span class="lesson-number">02</span><div><span class="section-kicker">MATRICES &amp; TENSORS</span><h2 id="tensorTitle">행렬은 숫자 묶음을 변환해요</h2></div></div>
+              <span class="lesson-time">약 3분</span>
+            </div>
+            <div class="lesson-grid tensor-layout">
+              <article class="content-card concept-card">
+                <span class="card-label">핵심 개념</span>
+                <p>행렬은 숫자를 행과 열로 정리한 표예요. 벡터에 행렬을 곱하면 좌표를 늘리거나, 돌리거나, 다른 특징으로 바꿀 수 있어요.</p>
+                <div class="formula-block"><span class="formula-caption">선형 변환</span><strong>y = Wx + b</strong></div>
+                <p class="small-copy">신경망의 한 층은 입력 벡터 <em>x</em>를 가중치 행렬 <em>W</em>로 변환하고 편향 <em>b</em>를 더해 다음 층으로 전달해요.</p>
+              </article>
+              <article class="content-card shape-card">
+                <div class="card-heading"><div><span class="card-label">크기로 이해하기</span><h3>차원이 늘어나면 이름도 바뀌어요</h3></div></div>
+                <div class="shape-list">
+                  <div class="shape-item"><span class="shape-visual scalar-visual">7</span><span class="shape-text"><strong>스칼라</strong><small>숫자 하나 · 0차원</small></span><code>shape: ()</code></div>
+                  <div class="shape-item"><span class="shape-visual vector-visual"><i></i><i></i><i></i></span><span class="shape-text"><strong>벡터</strong><small>숫자 줄 · 1차원</small></span><code>shape: (3,)</code></div>
+                  <div class="shape-item"><span class="shape-visual matrix-visual"><i></i><i></i><i></i><i></i></span><span class="shape-text"><strong>행렬</strong><small>숫자 표 · 2차원</small></span><code>shape: (2, 2)</code></div>
+                  <div class="shape-item"><span class="shape-visual tensor-visual"><i></i><i></i><i></i><i></i></span><span class="shape-text"><strong>텐서</strong><small>다차원 숫자 묶음</small></span><code>shape: (2, 3, 4)</code></div>
+                </div>
+                <p class="shape-note"><span aria-hidden="true">↳</span> 사진 한 장은 높이 × 너비 × 색상 채널로 표현할 수 있어요.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="lesson-section" id="calculus" aria-labelledby="calculusTitle">
+            <div class="lesson-heading">
+              <div class="lesson-heading-main"><span class="lesson-number">03</span><div><span class="section-kicker">CALCULUS &amp; OPTIMIZATION</span><h2 id="calculusTitle">미분은 지금 얼마나 변하는지 알려줘요</h2></div></div>
+              <span class="lesson-time">약 5분</span>
+            </div>
+            <div class="lesson-grid">
+              <article class="content-card concept-card">
+                <span class="card-label">핵심 개념</span>
+                <p>미분값은 그래프의 한 지점에서 기울기가 얼마나 가파른지 알려줘요. 입력을 아주 조금 바꿨을 때 결과가 어느 방향으로 얼마나 바뀌는지를 뜻해요.</p>
+                <div class="formula-block"><span class="formula-caption">기울기의 반대 방향으로 한 걸음</span><strong>w ← w − η · f′(w)</strong></div>
+                <p class="small-copy">모델은 예측의 오차가 작아지는 쪽으로 가중치를 조금씩 바꿔요. 이 반복 과정을 경사하강법이라고 해요.</p>
+              </article>
+              <article class="content-card descent-card" aria-labelledby="descentTitle">
+                <div class="card-heading"><div><span class="card-label">한 걸음씩 내려가기</span><h3 id="descentTitle">경사하강법 미니 실험</h3></div><span class="mini-badge">f(w) = (w − 2)² + 1</span></div>
+                <div class="descent-chart-wrap"><svg id="descentChart" class="descent-chart" viewBox="0 0 360 150" role="img" aria-label="포물선 그래프 위에서 최솟값을 향해 이동하는 과정"><path class="chart-grid" d="M35 25H344M35 65H344M35 105H344M75 18V128M145 18V128M215 18V128M285 18V128"></path><path class="chart-axis" d="M35 18V128H344"></path><path class="loss-curve" d="M43 31 Q180 180 331 31"></path><g id="descentTrail"></g><circle id="descentPoint" class="descent-point" cx="260" cy="0" r="6"></circle><text class="axis-label" x="337" y="143">w</text><text class="axis-label" x="18" y="22">오차</text></svg></div>
+                <div class="slider-row"><label for="startWeight">시작 위치 <output id="weightValue" for="startWeight">w = 4.5</output></label><input id="startWeight" type="range" min="-1" max="5" step="0.1" value="4.5" /></div>
+                <div class="descent-bottom"><p id="descentMessage" aria-live="polite">시작점에서 최솟값까지 이동 경로를 확인해보세요.</p><button class="step-button" id="stepButton" type="button">한 번 학습하기 <span aria-hidden="true">→</span></button></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="lesson-section" id="probability" aria-labelledby="probabilityTitle">
+            <div class="lesson-heading">
+              <div class="lesson-heading-main"><span class="lesson-number">04</span><div><span class="section-kicker">PROBABILITY</span><h2 id="probabilityTitle">확률은 불확실성을 다루는 방법이에요</h2></div></div>
+              <span class="lesson-time">약 3분</span>
+            </div>
+            <div class="probability-grid">
+              <article class="content-card probability-card"><span class="probability-icon" aria-hidden="true">P</span><div><span class="card-label">가능성을 숫자로</span><h3>확률과 분포</h3><p>모델의 예측은 언제나 확신의 정도를 함께 가져요. 확률 분포는 가능한 결과와 그 결과가 나타날 가능성을 모아 보여줘요.</p><div class="formula-inline">0 ≤ P(A) ≤ 1</div></div></article>
+              <article class="content-card probability-card"><span class="probability-icon stat-icon" aria-hidden="true">μ</span><div><span class="card-label">데이터의 중심과 퍼짐</span><h3>평균과 분산</h3><p>평균은 값의 중심을, 분산은 값들이 평균에서 얼마나 흩어져 있는지를 요약해요. 데이터를 표준화하거나 학습 상태를 살펴볼 때 쓰여요.</p><div class="formula-inline">분산 = 평균 (값 − 평균)²</div></div></article>
+            </div>
+          </section>
+
+          <section class="next-step" aria-label="다음 학습 영역">
+            <div><span class="section-kicker">NICE WORK</span><h2>수학 도구를 살펴봤어요.</h2><p>이제 이 도구가 학습 과정에서 어떻게 쓰이는지 이어서 배워봐요.</p></div>
+            <a href="https://github.com/yea-kasane-teto/AIN-main" class="next-link">로드맵으로 돌아가기 <span aria-hidden="true">↗</span></a>
+          </section>
+        </div>
+        <footer class="site-footer"><a class="footer-brand" href="#top"><span class="brand-mark small-mark" aria-hidden="true">A</span><strong>AIN</strong></a><span>AI를 이해하는 첫걸음, 수학부터 천천히.</span><a href="#top" class="back-to-top">맨 위로 ↑</a></footer>
+      </main>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
