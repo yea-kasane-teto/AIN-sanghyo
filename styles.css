@@ -24,10 +24,10 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .learning-app { min-height: 100vh; }
 .topbar { position: sticky; z-index: 10; top: 0; height: 104px; display: grid; grid-template-columns: 1fr minmax(260px, 420px) 1fr; align-items: center; gap: 26px; padding: 0 max(28px, calc((100vw - 1360px) / 2)); border-bottom: 1px solid #e9eef5; background: #ffffffed; backdrop-filter: blur(14px); }
 .brand { width: fit-content; display: flex; align-items: center; gap: 14px; }
-.brand-logo { width: 138px; height: 90px; flex: 0 0 138px; display: block; border-radius: 12px; background: #fff; object-fit: cover; object-position: center; }
-.brand-name { display: grid; gap: 2px; }
-.brand-name strong { color: #27374e; font: 800 24px Manrope, sans-serif; letter-spacing: -.07em; }
-.brand-name small { color: #99a8bc; font: 700 12px 'Gowun Dodum', sans-serif; letter-spacing: .02em; }
+.brand-logo { width: 90px; height: 58px; flex: 0 0 90px; display: block; object-fit: cover; object-position: center; }
+.brand-copy { display: grid; gap: 2px; }
+.brand-copy strong { color: #27374e; font: 800 20px Manrope, sans-serif; letter-spacing: -.06em; }
+.brand-copy small { color: #8491a4; font-size: 11px; }
 .search-wrap { height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 10px 0 13px; border: 1px solid #e6ecf4; border-radius: 11px; background: #f9fbfd; color: #8393a8; transition: border .18s, box-shadow .18s; }
 .search-wrap:focus-within { border-color: #9fc7f7; box-shadow: 0 0 0 3px #3485e812; }
 .search-wrap svg { width: 17px; height: 17px; flex: 0 0 17px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.8; }
@@ -230,10 +230,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 }
 @media (max-width: 720px) {
   .topbar { height: 82px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 0 16px; }
-  .brand { gap: 8px; }
-  .brand-logo { width: 102px; height: 66px; flex-basis: 102px; border-radius: 10px; }
-  .brand-name strong { font-size: 16px; }
-  .brand-name small { font-size: 8px; }
+  .brand { gap: 12px; }
+  .brand-logo { width: 90px; height: 58px; flex-basis: 90px; }
   .search-wrap { height: 37px; gap: 7px; padding: 0 8px; }
   .search-wrap svg { width: 15px; height: 15px; flex-basis: 15px; }
   .search-wrap input { font-size: 10px; }
@@ -478,4 +476,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .vector-inputs { gap: 10px; margin-top: 0; }
   .graph-wrap { height: 220px; margin-top: 0; }
   .descent-chart-wrap { height: 205px; margin-top: 0; }
+}
+
+@media (min-width: 1500px) {
+  .brand { gap: clamp(12px, .7vw, 18px); }
+  .brand-logo { width: clamp(90px, 3.9vw, 102px); height: clamp(58px, 2.5vw, 66px); flex-basis: clamp(90px, 3.9vw, 102px); }
+  .brand-copy strong { font-size: clamp(20px, .8vw, 27px); }
+  .brand-copy small { font-size: clamp(11px, .47vw, 14px); }
 }
