@@ -35,8 +35,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .search-wrap input:focus-visible { outline: 0; }
 .search-wrap input::placeholder { color: #a0adbd; }
 .search-wrap kbd { flex: 0 0 auto; padding: 4px 7px; border: 1px solid #e6ebf2; border-radius: 5px; background: #fff; color: #a1adbc; font: 500 10px 'DM Sans', sans-serif; }
-.home-link { justify-self: end; display: inline-flex; align-items: center; gap: 10px; color: #74849a; transition: color .16s; }
-.home-logo { width: 74px; height: 50px; flex: 0 0 74px; display: block; overflow: hidden; border-radius: 9px; background: #fff; object-fit: cover; object-position: center; }
+.home-link { min-width: 0; max-width: 100%; justify-self: end; display: inline-flex; align-items: center; gap: 10px; color: #74849a; transition: color .16s; }
+.home-logo { width: 74px; height: 50px; max-width: 74px; max-height: 50px; flex: 0 0 74px; display: block; border-radius: 9px; background: #fff; object-fit: cover; object-position: center; }
 .home-brand-name { display: grid; gap: 2px; line-height: 1.2; }
 .home-brand-name strong { color: #27374e; font: 800 19px Manrope, sans-serif; letter-spacing: -.07em; }
 .home-brand-name small { color: #99a8bc; font: 700 9px Manrope, sans-serif; letter-spacing: .11em; white-space: nowrap; }
