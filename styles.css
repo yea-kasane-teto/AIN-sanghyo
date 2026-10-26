@@ -35,8 +35,12 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .search-wrap input:focus-visible { outline: 0; }
 .search-wrap input::placeholder { color: #a0adbd; }
 .search-wrap kbd { flex: 0 0 auto; padding: 4px 7px; border: 1px solid #e6ebf2; border-radius: 5px; background: #fff; color: #a1adbc; font: 500 10px 'DM Sans', sans-serif; }
-.home-link { justify-self: end; display: inline-flex; align-items: center; gap: 7px; color: #74849a; font-size: 11px; font-weight: 600; transition: color .16s; }
-.home-link:hover { color: var(--blue); }
+.home-link { justify-self: end; display: inline-flex; align-items: center; gap: 10px; color: #74849a; transition: color .16s; }
+.home-logo { width: 74px; height: 50px; flex: 0 0 74px; display: block; overflow: hidden; border-radius: 9px; background: #fff; object-fit: cover; object-position: center; }
+.home-brand-name { display: grid; gap: 2px; line-height: 1.2; }
+.home-brand-name strong { color: #27374e; font: 800 19px Manrope, sans-serif; letter-spacing: -.07em; }
+.home-brand-name small { color: #99a8bc; font: 700 9px Manrope, sans-serif; letter-spacing: .11em; white-space: nowrap; }
+.home-link:hover .home-brand-name strong { color: var(--blue); }
 
 .course-hero { position: relative; min-height: 360px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); align-items: center; gap: 28px; overflow: hidden; padding: 49px max(52px, calc((100vw - 1240px) / 2)); border-radius: 0 0 27px 27px; background: radial-gradient(ellipse at 27% 110%, #3b95e0 0, transparent 43%), radial-gradient(ellipse at 74% -23%, #3286d5 0, transparent 47%), linear-gradient(115deg, #2786d9, #1265be 69%, #0d59ae); color: #fff; }
 .course-hero::before, .course-hero::after { position: absolute; width: 540px; height: 540px; border: 1px solid #ffffff17; border-radius: 50%; content: ''; pointer-events: none; }
@@ -238,8 +242,10 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .search-wrap svg { width: 15px; height: 15px; flex-basis: 15px; }
   .search-wrap input { font-size: 10px; }
   .search-wrap kbd { display: none; }
-  .home-link { font-size: 0; }
-  .home-link span { font-size: 15px; }
+  .home-link { gap: 7px; }
+  .home-logo { width: 54px; height: 38px; flex-basis: 54px; border-radius: 7px; }
+  .home-brand-name strong { font-size: 14px; }
+  .home-brand-name small { font-size: 8px; letter-spacing: .06em; }
   .course-hero { min-height: 380px; display: block; padding: 38px 28px 190px; border-radius: 0 0 20px 20px; }
   .course-hero h1 { margin: 21px 0 10px; font-size: 54px; }
   .course-hero p { font-size: 12px; line-height: 1.85; }
@@ -312,7 +318,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 /* Readable type with a wider desktop canvas and a horizontal lesson menu. */
 @media (min-width: 721px) {
   .search-wrap input { font-size: 15px; }
-  .home-link { font-size: 14px; }
+  .home-brand-name strong { font-size: 19px; }
+  .home-brand-name small { font-size: 9px; }
   .hero-eyebrow, .hero-tags { font-size: 13px; }
   .course-hero p { font-size: 17px; }
   .formula-tile small { font-size: 11px; }
@@ -378,7 +385,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 
 @media (max-width: 720px) {
   .search-wrap input { font-size: 13px; }
-  .home-link span { font-size: 18px; }
+  .home-logo { width: 54px; height: 38px; flex-basis: 54px; }
   .hero-eyebrow { font-size: 10px; }
   .course-hero p { font-size: 14px; }
   .hero-tags { font-size: 9px; }
