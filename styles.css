@@ -14,7 +14,7 @@
   --shadow: 0 12px 34px #233d5c0b;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 22px; }
+html { scroll-behavior: smooth; scroll-padding-top: 116px; }
 body { min-width: 320px; min-height: 100vh; margin: 0; }
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -22,12 +22,12 @@ a { color: inherit; text-decoration: none; }
 button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #80b6ff; outline-offset: 3px; }
 [hidden] { display: none !important; }
 .learning-app { min-height: 100vh; }
-.topbar { position: sticky; z-index: 10; top: 0; height: 76px; display: grid; grid-template-columns: 1fr minmax(260px, 420px) 1fr; align-items: center; gap: 26px; padding: 0 max(28px, calc((100vw - 1360px) / 2)); border-bottom: 1px solid #e9eef5; background: #ffffffed; backdrop-filter: blur(14px); }
-.brand { width: fit-content; display: flex; align-items: center; gap: 11px; }
-.brand-logo { width: 60px; height: 52px; flex: 0 0 60px; display: block; border-radius: 12px; background: #fff; object-fit: cover; object-position: center; }
+.topbar { position: sticky; z-index: 10; top: 0; height: 104px; display: grid; grid-template-columns: 1fr minmax(260px, 420px) 1fr; align-items: center; gap: 26px; padding: 0 max(28px, calc((100vw - 1360px) / 2)); border-bottom: 1px solid #e9eef5; background: #ffffffed; backdrop-filter: blur(14px); }
+.brand { width: fit-content; display: flex; align-items: center; gap: 14px; }
+.brand-logo { width: 138px; height: 90px; flex: 0 0 138px; display: block; border-radius: 12px; background: #fff; object-fit: cover; object-position: center; }
 .brand-name { display: grid; gap: 2px; }
-.brand-name strong { color: #27374e; font: 800 17px Manrope, sans-serif; letter-spacing: -.07em; }
-.brand-name small { color: #99a8bc; font: 700 8px Manrope, sans-serif; letter-spacing: .11em; }
+.brand-name strong { color: #27374e; font: 800 24px Manrope, sans-serif; letter-spacing: -.07em; }
+.brand-name small { color: #99a8bc; font: 700 12px 'Gowun Dodum', sans-serif; letter-spacing: .02em; }
 .search-wrap { height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 10px 0 13px; border: 1px solid #e6ecf4; border-radius: 11px; background: #f9fbfd; color: #8393a8; transition: border .18s, box-shadow .18s; }
 .search-wrap:focus-within { border-color: #9fc7f7; box-shadow: 0 0 0 3px #3485e812; }
 .search-wrap svg { width: 17px; height: 17px; flex: 0 0 17px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.8; }
@@ -87,7 +87,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .progress-summary strong { color: #4a7fb4; font: 700 9px Manrope, sans-serif; }
 
 .course-layout { max-width: 1280px; display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: start; gap: 30px; margin: 0 auto; padding: 35px 24px 60px; }
-.course-sidebar { position: sticky; top: 98px; padding: 17px 13px; border: 1px solid #e6edf5; border-radius: 13px; background: #fff; box-shadow: var(--shadow); }
+.course-sidebar { position: sticky; top: 116px; padding: 17px 13px; border: 1px solid #e6edf5; border-radius: 13px; background: #fff; box-shadow: var(--shadow); }
 .sidebar-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 8px 13px; border-bottom: 1px solid #edf1f6; color: #5c7089; font: 700 10px 'Gowun Dodum', sans-serif; }
 .sidebar-heading small { color: #a0afc0; font: 700 8px Manrope, sans-serif; letter-spacing: .08em; }
 .lesson-nav { display: grid; gap: 4px; padding: 10px 0; }
@@ -104,7 +104,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #94a6ba; font: 700 9px Manrope, sans-serif; letter-spacing: .1em; }
 .lesson-heading h2 { margin: 12px 0 7px; color: #2c4058; font: 700 clamp(27px, 3vw, 37px)/1.38 'Gowun Dodum', sans-serif; letter-spacing: -.045em; word-break: keep-all; }
 .lesson-heading p { margin: 0; color: #8292a6; font: 400 11px/1.8 'Gowun Dodum', sans-serif; }
-.lesson-section { margin: 0 0 17px; padding: 23px; border: 1px solid #e6edf5; border-radius: 14px; background: #fff; box-shadow: var(--shadow); scroll-margin-top: 92px; }
+.lesson-section { margin: 0 0 17px; padding: 23px; border: 1px solid #e6edf5; border-radius: 14px; background: #fff; box-shadow: var(--shadow); scroll-margin-top: 116px; }
 .section-title-row { display: flex; align-items: start; gap: 12px; margin-bottom: 17px; }
 .section-index { flex: 0 0 auto; display: grid; width: 27px; height: 27px; place-items: center; border-radius: 8px; background: #eef5ff; color: #347fcf; font: 800 9px Manrope, sans-serif; }
 .section-title-row h3 { margin: 0; color: #33475f; font: 700 17px/1.5 'Gowun Dodum', sans-serif; letter-spacing: -.035em; }
@@ -229,11 +229,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .calculus-layout { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
 }
 @media (max-width: 720px) {
-  .topbar { height: 66px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 0 16px; }
+  .topbar { height: 82px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 0 16px; }
   .brand { gap: 8px; }
-  .brand-logo { width: 48px; height: 42px; flex-basis: 48px; border-radius: 10px; }
-  .brand-name strong { font-size: 14px; }
-  .brand-name small { font-size: 6px; }
+  .brand-logo { width: 102px; height: 66px; flex-basis: 102px; border-radius: 10px; }
+  .brand-name strong { font-size: 16px; }
+  .brand-name small { font-size: 8px; }
   .search-wrap { height: 37px; gap: 7px; padding: 0 8px; }
   .search-wrap svg { width: 15px; height: 15px; flex-basis: 15px; }
   .search-wrap input { font-size: 10px; }
@@ -265,7 +265,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .lesson-heading { margin-bottom: 18px; }
   .lesson-heading h2 { margin: 9px 0 6px; font-size: 26px; }
   .lesson-heading p { font-size: 9px; }
-  .lesson-section { margin-bottom: 12px; padding: 16px 13px; border-radius: 11px; scroll-margin-top: 74px; }
+  .lesson-section { margin-bottom: 12px; padding: 16px 13px; border-radius: 11px; scroll-margin-top: 94px; }
   .section-title-row { gap: 9px; margin-bottom: 13px; }
   .section-index { width: 24px; height: 24px; }
   .section-title-row h3 { font-size: 13px; }
@@ -365,7 +365,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 @media (min-width: 1101px) {
   .course-overview, .course-layout { max-width: 1440px; }
   .course-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 34px; }
-  .course-sidebar { position: sticky; top: 98px; display: block; margin-bottom: 0; padding: 20px 16px; }
+  .course-sidebar { position: sticky; top: 116px; display: block; margin-bottom: 0; padding: 20px 16px; }
   .sidebar-heading { padding: 0 8px 14px; border-bottom: 1px solid #edf1f6; }
   .lesson-nav { grid-template-columns: 1fr; gap: 5px; padding: 12px 0; }
   .lesson-nav a { min-height: 48px; gap: 10px; padding: 9px 10px; }
