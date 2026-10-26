@@ -24,7 +24,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .learning-app { min-height: 100vh; }
 .topbar { position: sticky; z-index: 10; top: 0; height: 76px; display: grid; grid-template-columns: 1fr minmax(260px, 420px) 1fr; align-items: center; gap: 26px; padding: 0 max(28px, calc((100vw - 1360px) / 2)); border-bottom: 1px solid #e9eef5; background: #ffffffed; backdrop-filter: blur(14px); }
 .brand { width: fit-content; display: flex; align-items: center; gap: 11px; }
-.brand-mark { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(145deg, #2c8be7, #1259b4); box-shadow: 0 6px 14px #1769c52b; color: #fff; font: 800 11px Manrope, sans-serif; letter-spacing: -.08em; }
+.brand-logo { width: 60px; height: 52px; flex: 0 0 60px; display: block; border-radius: 12px; background: #fff; object-fit: cover; object-position: center; }
 .brand-name { display: grid; gap: 2px; }
 .brand-name strong { color: #27374e; font: 800 17px Manrope, sans-serif; letter-spacing: -.07em; }
 .brand-name small { color: #99a8bc; font: 700 8px Manrope, sans-serif; letter-spacing: .11em; }
@@ -35,12 +35,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .search-wrap input:focus-visible { outline: 0; }
 .search-wrap input::placeholder { color: #a0adbd; }
 .search-wrap kbd { flex: 0 0 auto; padding: 4px 7px; border: 1px solid #e6ebf2; border-radius: 5px; background: #fff; color: #a1adbc; font: 500 10px 'DM Sans', sans-serif; }
-.home-link { min-width: 0; max-width: 100%; justify-self: end; display: inline-flex; align-items: center; gap: 10px; color: #74849a; transition: color .16s; }
-.home-logo { width: 74px; height: 50px; max-width: 74px; max-height: 50px; flex: 0 0 74px; display: block; border-radius: 9px; background: #fff; object-fit: cover; object-position: center; }
-.home-brand-name { display: grid; gap: 2px; line-height: 1.2; }
-.home-brand-name strong { color: #27374e; font: 800 19px Manrope, sans-serif; letter-spacing: -.07em; }
-.home-brand-name small { color: #99a8bc; font: 700 9px Manrope, sans-serif; letter-spacing: .11em; white-space: nowrap; }
-.home-link:hover .home-brand-name strong { color: var(--blue); }
+.home-link { justify-self: end; display: inline-flex; align-items: center; gap: 7px; color: #74849a; font-size: 11px; font-weight: 600; transition: color .16s; }
+.home-link:hover { color: var(--blue); }
 
 .course-hero { position: relative; min-height: 360px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); align-items: center; gap: 28px; overflow: hidden; padding: 49px max(52px, calc((100vw - 1240px) / 2)); border-radius: 0 0 27px 27px; background: radial-gradient(ellipse at 27% 110%, #3b95e0 0, transparent 43%), radial-gradient(ellipse at 74% -23%, #3286d5 0, transparent 47%), linear-gradient(115deg, #2786d9, #1265be 69%, #0d59ae); color: #fff; }
 .course-hero::before, .course-hero::after { position: absolute; width: 540px; height: 540px; border: 1px solid #ffffff17; border-radius: 50%; content: ''; pointer-events: none; }
@@ -235,17 +231,15 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 @media (max-width: 720px) {
   .topbar { height: 66px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 0 16px; }
   .brand { gap: 8px; }
-  .brand-mark { width: 35px; height: 35px; border-radius: 10px; }
+  .brand-logo { width: 48px; height: 42px; flex-basis: 48px; border-radius: 10px; }
   .brand-name strong { font-size: 14px; }
   .brand-name small { font-size: 6px; }
   .search-wrap { height: 37px; gap: 7px; padding: 0 8px; }
   .search-wrap svg { width: 15px; height: 15px; flex-basis: 15px; }
   .search-wrap input { font-size: 10px; }
   .search-wrap kbd { display: none; }
-  .home-link { gap: 7px; }
-  .home-logo { width: 54px; height: 38px; flex-basis: 54px; border-radius: 7px; }
-  .home-brand-name strong { font-size: 14px; }
-  .home-brand-name small { font-size: 8px; letter-spacing: .06em; }
+  .home-link { font-size: 0; }
+  .home-link span { font-size: 15px; }
   .course-hero { min-height: 380px; display: block; padding: 38px 28px 190px; border-radius: 0 0 20px 20px; }
   .course-hero h1 { margin: 21px 0 10px; font-size: 54px; }
   .course-hero p { font-size: 12px; line-height: 1.85; }
@@ -318,8 +312,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 /* Readable type with a wider desktop canvas and a horizontal lesson menu. */
 @media (min-width: 721px) {
   .search-wrap input { font-size: 15px; }
-  .home-brand-name strong { font-size: 19px; }
-  .home-brand-name small { font-size: 9px; }
+  .home-link { font-size: 14px; }
   .hero-eyebrow, .hero-tags { font-size: 13px; }
   .course-hero p { font-size: 17px; }
   .formula-tile small { font-size: 11px; }
@@ -385,7 +378,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 
 @media (max-width: 720px) {
   .search-wrap input { font-size: 13px; }
-  .home-logo { width: 54px; height: 38px; flex-basis: 54px; }
   .hero-eyebrow { font-size: 10px; }
   .course-hero p { font-size: 14px; }
   .hero-tags { font-size: 9px; }
