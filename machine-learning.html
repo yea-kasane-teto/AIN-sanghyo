@@ -1,19 +1,89 @@
 <!doctype html>
-<html lang="ko">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1769c5"><title>머신러닝 | AIN</title><link rel="stylesheet" href="./machine-learning.css"></head>
+<html lang="ko" data-module="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1769c5" />
+  <meta name="description" content="공부 시간과 시험점수로 머신러닝의 패턴, 예측, 학습 과정을 직접 확인하는 학습 공간입니다." />
+  <title>머신러닝 | AIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Gowun+Dodum&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=ml-layout-20261027" />
+  <link rel="stylesheet" href="./machine-learning.css?v=ml-layout-20261027" />
+</head>
 <body>
-<header><a class="brand" href="https://yea-kasane-teto.github.io/AIN-main/">AIN <small>AI에 들어가다</small></a><a href="https://yea-kasane-teto.github.io/AIN-main/">메인으로 ↗</a></header>
-<main>
-<section class="hero"><span class="eyebrow">AI LEARNING AREA · 03</span><h1>데이터가 경험이 되는 순간,<br>머신러닝</h1><p>공부 시간과 시험점수로 나만의 AI를 학습시키세요.<br>점들이 예측이 되는 과정을 직접 확인해 봐요.</p><div class="tags">DATA → PATTERN → PREDICTION</div></section>
-<nav aria-label="학습 목차"><a href="#intro">01 머신러닝이란?</a><a href="#principle">02 작동 원리</a><a href="#patterns">03-1 패턴 찾기</a><a href="#training">03-2 학습 과정</a></nav>
-<section id="intro"><span class="eyebrow">01 · CONCEPT</span><h2>머신러닝이란?</h2><p>컴퓨터가 <strong>데이터에서 패턴을 학습</strong>하고, 학습한 패턴을 이용해 새로운 데이터의 결과를 예측하는 방법이에요.</p><div class="cards"><article><b>데이터</b><p>공부 시간과 실제 시험점수를 모아요.</p></article><article><b>패턴</b><p>시간과 점수 사이의 관계를 직선으로 찾아요.</p></article><article><b>예측</b><p>새로운 공부 시간을 넣어 예상 점수를 구해요.</p></article></div></section>
-<section id="principle"><span class="eyebrow">02 · HOW IT WORKS</span><h2>예측하고, 비교하고, 조금씩 수정해요</h2><p>입력값 x는 공부 시간, 정답 y는 실제 점수예요. 선형회귀 모델은 <strong>예상 점수 = 가중치 w × 공부 시간 + 편향 b</strong>로 계산해요.</p><div class="flow"><span>① 데이터 입력</span><span>② 모델이 예측</span><span>③ 정답과 비교 · 손실 계산</span><span>④ 가중치와 편향 수정 ↻</span></div><p class="note">손실은 예측 오차를 제곱한 값의 평균(MSE)이에요. 경사하강법은 이 손실이 작아지는 방향으로 w와 b를 반복해서 조정해요. 아래에서 실제 숫자로 확인해 보세요.</p></section>
-<section id="patterns"><span class="eyebrow">03-1 · YOUR FIRST MODEL</span><h2>직접 AI 학습시키기: 데이터에서 패턴 찾기</h2><p>공부 시간과 점수를 추가하고 <strong>학습하기</strong>를 눌러 보세요. 선형회귀가 오차를 최소화하는 직선을 찾아요.</p>
-<div class="lab"><div class="controls"><h3>학습 데이터</h3><form id="dataForm"><label>공부 시간 (0~24시간)<input id="hours" type="number" min="0" max="24" step="any" value="6" required></label><label>시험점수 (0~100점)<input id="score" type="number" min="0" max="100" step="any" value="85" required></label><button>데이터 추가 +</button></form><div class="secondary"><button id="example" type="button">예제 복원</button><button id="clear" type="button">모두 지우기</button></div><div class="table-wrap"><table><caption>공유 학습 데이터 <span id="count"></span></caption><thead><tr><th>시간</th><th>점수</th><th>삭제</th></tr></thead><tbody id="dataRows"></tbody></table></div><button id="fit" type="button">학습하기 → 예측 직선 만들기</button><p id="dataMessage" role="status"></p></div>
-<div><div class="graph-head"><h3>공부 시간과 시험점수</h3><span>● 데이터 <em>━ 예측 직선</em></span></div><svg id="patternGraph" viewBox="0 0 640 350" role="img" aria-label="공부 시간과 점수 데이터 및 학습한 예측 직선"></svg><form id="predictForm" class="prediction"><label>새로운 공부 시간<input id="predictHours" type="number" min="0" max="24" step="any" value="5" required></label><button>예측하기</button><output id="prediction" aria-live="polite">먼저 학습해 주세요.</output></form><p id="fitFormula" class="note">학습 전 · 데이터를 준비해 주세요.</p></div></div>
-<div class="callout">모델은 데이터 사이의 관계를 찾아 새로운 입력값을 예측해요. 데이터가 적거나 불규칙하면 예측이 부정확할 수 있어요. 공부 시간만으로 실제 성적을 결정할 수는 없어요.</div><a class="next" href="#training">같은 데이터로 학습 과정 살펴보기 ↓</a></section>
-<section id="training"><span class="eyebrow">03-2 · WATCH IT LEARN</span><h2>직선이 배우는 과정을 따라가 보세요</h2><p>위에서 만든 데이터가 자동으로 반영돼요. 매 반복마다 모든 데이터로 예측과 손실을 계산하고, 가중치와 편향을 바꿔요.</p><div class="toolbar"><button id="start">학습 시작</button><button id="pause" disabled>일시정지</button><button id="reset">처음부터</button><label>학습 속도 <select id="speed"><option value="250">천천히</option><option value="70" selected>보통</option><option value="16">빠르게</option></select></label></div><p id="trainingStatus" role="status">학습 준비 · 초기 가중치와 편향은 0이에요.</p>
-<div class="metrics"><article>반복 횟수<strong id="epoch">0</strong></article><article>가중치 w<strong id="weight">0</strong></article><article>편향 b<strong id="bias">0</strong></article><article>손실 MSE<strong id="loss">—</strong></article></div>
-<div class="charts"><article><h3>데이터와 현재 예측 직선</h3><svg id="trainingGraph" viewBox="0 0 640 350" role="img" aria-label="경사하강법으로 변화하는 예측 직선과 데이터"></svg></article><article><h3>반복에 따른 손실</h3><svg id="lossGraph" viewBox="0 0 640 350" role="img" aria-label="반복 횟수에 따른 평균제곱오차"></svg></article></div>
-<div class="cards steps"><article><b>① 학습 데이터 입력</b><p id="stepData"></p></article><article><b>② 현재 모델이 예측</b><p id="stepPredict"></p></article><article><b>③ 손실 계산</b><p id="stepLoss"></p></article><article><b>④ 가중치 수정</b><p id="stepUpdate"></p></article></div><p class="note">안정적인 학습을 위해 데이터 크기에 맞춰 학습률을 자동 설정해요. 화면의 w와 b는 원래 시간 단위의 값이에요. 직선의 출력은 0~100점으로 제한하지 않으므로 범위 밖 예측도 나타날 수 있어요.</p></section>
-</main><footer>AIN · 작은 실험으로 이해하는 AI <a href="#">맨 위로 ↑</a></footer><script src="./machine-learning.js"></script></body></html>
+  <div class="learning-app" id="top">
+    <header class="topbar">
+      <a class="brand" href="https://yea-kasane-teto.github.io/AIN-main/" aria-label="AIN 메인 화면으로 이동"><img class="brand-logo" src="./파란색%20AIN%20스타일%20로고.png" alt="AIN 로고" width="90" height="58" /><span class="brand-copy"><strong>AIN</strong><small>AI에 들어가다</small></span></a>
+      <label class="search-wrap" for="Search-bar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"></circle><path d="m15.4 15.4 4.2 4.2"></path></svg>
+        <input id="Search-bar" type="search" placeholder="머신러닝 내용 검색" aria-label="머신러닝 내용 검색" autocomplete="off" /><kbd>/</kbd>
+      </label>
+      <a class="home-link" href="https://yea-kasane-teto.github.io/AIN-main/" aria-label="AIN 메인 화면으로 이동">AIN 메인 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section class="course-hero" aria-labelledby="courseTitle">
+        <div class="course-hero-copy">
+          <div class="hero-eyebrow"><span></span> AI LEARNING AREA · 03</div>
+          <h1 id="courseTitle">머신러닝</h1>
+          <p>공부 시간과 시험점수로 나만의 AI를 학습시키세요.<br class="desktop-break" /> 점들이 예측이 되는 과정을 직접 확인해 봐요.</p>
+          <div class="hero-tags" aria-label="학습 주제"><span>DATA</span><span aria-hidden="true">→</span><span>PATTERN</span><span aria-hidden="true">→</span><span>PREDICTION</span></div>
+        </div>
+        <div class="math-illustration" aria-hidden="true">
+          <div class="math-orbit orbit-one"></div><div class="math-orbit orbit-two"></div>
+          <div class="math-grid ml-hero-grid"><svg viewBox="0 0 228 166" focusable="false"><path class="ml-hero-axes" d="M30 20V137H207M30 99H207M30 61H207M73 20V137M116 20V137M159 20V137"/><path class="ml-hero-trend" d="M40 124L198 38"/><g class="ml-hero-points"><circle cx="53" cy="117" r="5"/><circle cx="82" cy="101" r="5"/><circle cx="113" cy="92" r="5"/><circle cx="145" cy="63" r="5"/><circle cx="181" cy="53" r="5"/></g></svg></div>
+          <div class="formula-tile"><small>선형회귀</small><strong>y = wx + b</strong></div>
+          <span class="hero-float float-top">데이터 · 패턴</span><span class="hero-float float-bottom">예측</span>
+          <span class="hero-sparkle sparkle-one">✳</span><span class="hero-sparkle sparkle-two">✦</span>
+        </div>
+      </section>
+      <div class="course-overview">
+        <div class="overview-title"><span class="unit-code">ML · 01</span><span class="overview-divider"></span><span>데이터에서 패턴 찾기</span></div>
+        <div class="progress-summary"><span id="progressLabel">학습 진행도</span><div class="progress-track" id="progressTrack" role="progressbar" aria-label="머신러닝 학습 진행도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressFill"></span></div><strong id="progressPercent">0%</strong></div>
+      </div>
+      <div class="course-layout">
+        <aside class="course-sidebar" aria-label="머신러닝 목차">
+          <div class="sidebar-heading"><span>머신러닝 목차</span><small>ML</small></div>
+          <nav class="lesson-nav" id="lessonNavigation">
+            <a href="#intro" data-nav-section="intro"><span class="nav-number">01</span><span>머신러닝이란?</span></a>
+            <a href="#principle" data-nav-section="principle"><span class="nav-number">02</span><span>작동 원리</span></a>
+            <a href="#patterns" data-nav-section="patterns"><span class="nav-number">03-1</span><span>패턴 찾기</span></a>
+            <a href="#training" data-nav-section="training"><span class="nav-number">03-2</span><span>학습 과정</span></a>
+          </nav>
+          <div class="sidebar-note"><span class="note-icon" aria-hidden="true">✳</span><p>공부 시간과 시험점수로 <strong>나만의 AI</strong>를 학습시키세요.</p></div>
+        </aside>
+        <article class="lesson-content" id="lessonContent">
+          <header class="lesson-heading"><span class="eyebrow">ML-01 · 세 번째 학습 영역</span><h2>데이터가 경험이 되는 순간,<br class="desktop-break" /> 머신러닝</h2><p>점들이 예측이 되는 과정을 직접 확인해 봐요.</p></header>
+          <section class="lesson-section" id="intro" data-searchable aria-labelledby="introTitle">
+            <div class="section-title-row"><span class="section-index">01</span><div><span class="card-kicker">01 · CONCEPT</span><h3 id="introTitle">머신러닝이란?</h3><p>컴퓨터가 <strong>데이터에서 패턴을 학습</strong>하고, 학습한 패턴을 이용해 새로운 데이터의 결과를 예측하는 방법이에요.</p></div></div>
+            <div class="ml-cards"><article class="concept-card"><strong class="ml-card-title">데이터</strong><p>공부 시간과 실제 시험점수를 모아요.</p></article><article class="concept-card"><strong class="ml-card-title">패턴</strong><p>시간과 점수 사이의 관계를 직선으로 찾아요.</p></article><article class="concept-card"><strong class="ml-card-title">예측</strong><p>새로운 공부 시간을 넣어 예상 점수를 구해요.</p></article></div>
+          </section>
+          <section class="lesson-section" id="principle" data-searchable aria-labelledby="principleTitle">
+            <div class="section-title-row"><span class="section-index">02</span><div><span class="card-kicker">02 · HOW IT WORKS</span><h3 id="principleTitle">예측하고, 비교하고, 조금씩 수정해요</h3><p>입력값 x는 공부 시간, 정답 y는 실제 점수예요. 선형회귀 모델은 <strong>예상 점수 = 가중치 w × 공부 시간 + 편향 b</strong>로 계산해요.</p></div></div>
+            <div class="ml-flow"><span>① 데이터 입력</span><span>② 모델이 예측</span><span>③ 정답과 비교 · 손실 계산</span><span>④ 가중치와 편향 수정 ↻</span></div><p class="ml-note">손실은 예측 오차를 제곱한 값의 평균(MSE)이에요. 경사하강법은 이 손실이 작아지는 방향으로 w와 b를 반복해서 조정해요. 아래에서 실제 숫자로 확인해 보세요.</p>
+          </section>
+          <section class="lesson-section" id="patterns" data-searchable aria-labelledby="patternsTitle">
+            <div class="section-title-row"><span class="section-index">03-1</span><div><span class="card-kicker">03-1 · YOUR FIRST MODEL</span><h3 id="patternsTitle">직접 AI 학습시키기: 데이터에서 패턴 찾기</h3><p>공부 시간과 점수를 추가하고 <strong>학습하기</strong>를 눌러 보세요. 선형회귀가 오차를 최소화하는 직선을 찾아요.</p></div></div>
+            <div class="ml-lab"><div class="ml-panel ml-controls"><h4>학습 데이터</h4><form id="dataForm"><label>공부 시간 (0~24시간)<input id="hours" type="number" min="0" max="24" step="any" value="6" required></label><label>시험점수 (0~100점)<input id="score" type="number" min="0" max="100" step="any" value="85" required></label><button class="button button-primary">데이터 추가 +</button></form><div class="ml-secondary"><button class="button button-secondary" id="example" type="button">예제 복원</button><button class="button button-secondary" id="clear" type="button">모두 지우기</button></div><div class="ml-table-wrap"><table><caption>공유 학습 데이터 <span id="count"></span></caption><thead><tr><th>시간</th><th>점수</th><th>삭제</th></tr></thead><tbody id="dataRows"></tbody></table></div><button class="button button-primary" id="fit" type="button">학습하기 → 예측 직선 만들기</button><p id="dataMessage" role="status"></p></div>
+<div class="ml-panel ml-visual-panel"><div class="ml-graph-head"><h4>공부 시간과 시험점수</h4><span>● 데이터 <em>━ 예측 직선</em></span></div><svg class="ml-chart" id="patternGraph" viewBox="0 0 640 350" role="img" aria-label="공부 시간과 점수 데이터 및 학습한 예측 직선"></svg><form id="predictForm" class="ml-prediction"><label>새로운 공부 시간<input id="predictHours" type="number" min="0" max="24" step="any" value="5" required></label><button class="button button-primary">예측하기</button><output id="prediction" aria-live="polite">먼저 학습해 주세요.</output></form><p id="fitFormula" class="ml-note">학습 전 · 데이터를 준비해 주세요.</p></div></div>
+<div class="callout"><span aria-hidden="true">✳</span><span>모델은 데이터 사이의 관계를 찾아 새로운 입력값을 예측해요. 데이터가 적거나 불규칙하면 예측이 부정확할 수 있어요. 공부 시간만으로 실제 성적을 결정할 수는 없어요.</span></div><a class="ml-next" href="#training">같은 데이터로 학습 과정 살펴보기 ↓</a>
+          </section>
+          <section class="lesson-section" id="training" data-searchable aria-labelledby="trainingTitle">
+            <div class="section-title-row"><span class="section-index">03-2</span><div><span class="card-kicker">03-2 · WATCH IT LEARN</span><h3 id="trainingTitle">직선이 배우는 과정을 따라가 보세요</h3><p>위에서 만든 데이터가 자동으로 반영돼요. 매 반복마다 모든 데이터로 예측과 손실을 계산하고, 가중치와 편향을 바꿔요.</p></div></div>
+            <div class="ml-toolbar"><button class="button button-primary" id="start">학습 시작</button><button class="button button-secondary" id="pause" disabled>일시정지</button><button class="button button-secondary" id="reset">처음부터</button><label>학습 속도 <select id="speed"><option value="250">천천히</option><option value="70" selected>보통</option><option value="16">빠르게</option></select></label></div><p id="trainingStatus" role="status">학습 준비 · 초기 가중치와 편향은 0이에요.</p>
+<div class="ml-metrics"><article class="concept-card">반복 횟수<strong id="epoch">0</strong></article><article class="concept-card">가중치 w<strong id="weight">0</strong></article><article class="concept-card">편향 b<strong id="bias">0</strong></article><article class="concept-card">손실 MSE<strong id="loss">—</strong></article></div>
+<div class="ml-charts"><article class="ml-panel"><h4>데이터와 현재 예측 직선</h4><svg class="ml-chart" id="trainingGraph" viewBox="0 0 640 350" role="img" aria-label="경사하강법으로 변화하는 예측 직선과 데이터"></svg></article><article class="ml-panel"><h4>반복에 따른 손실</h4><svg class="ml-chart" id="lossGraph" viewBox="0 0 640 350" role="img" aria-label="반복 횟수에 따른 평균제곱오차"></svg></article></div>
+<div class="ml-steps"><article class="concept-card"><strong class="ml-card-title">① 학습 데이터 입력</strong><p id="stepData"></p></article><article class="concept-card"><strong class="ml-card-title">② 현재 모델이 예측</strong><p id="stepPredict"></p></article><article class="concept-card"><strong class="ml-card-title">③ 손실 계산</strong><p id="stepLoss"></p></article><article class="concept-card"><strong class="ml-card-title">④ 가중치 수정</strong><p id="stepUpdate"></p></article></div><p class="ml-note">안정적인 학습을 위해 데이터 크기에 맞춰 학습률을 자동 설정해요. 화면의 w와 b는 원래 시간 단위의 값이에요. 직선의 출력은 0~100점으로 제한하지 않으므로 범위 밖 예측도 나타날 수 있어요.</p>
+<div class="completion-row"><p>개념과 실험을 모두 살펴봤다면 학습 완료로 표시할 수 있어요.</p><button class="button button-secondary" id="completeLesson" type="button" aria-pressed="false">이 차시 학습 완료</button></div>
+          </section>
+        </article>
+      </div>
+      <div class="search-empty" id="searchEmpty" hidden><strong>검색 결과가 없어요.</strong><span>다른 단어로 다시 찾아보세요.</span></div>
+    </main>
+    <footer class="site-footer"><a class="footer-brand" href="#top">AIN <span>AI LEARNING AREA</span></a><span>작은 실험으로 이해하는 AI</span><a class="back-to-top" href="#top">맨 위로 ↑</a></footer>
+  </div>
+  <script src="./machine-learning.js"></script>
+  <script src="./machine-learning-ui.js?v=ml-layout-20261027"></script>
+</body>
+</html>

@@ -1,1 +1,80 @@
-:root{font-family:"Malgun Gothic",system-ui,sans-serif;color:#20334c;background:#f5f8fc;line-height:1.75;scroll-behavior:smooth}*{box-sizing:border-box}body{margin:0}a{color:#1769c5;text-decoration:none}header,footer{max-width:1200px;margin:auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:29px;font-weight:900}.brand small{font-size:12px;margin-left:12px;color:#718298}main{max-width:1180px;margin:auto;padding:0 24px}.hero{background:linear-gradient(120deg,#e5f0ff,#f2f8ff 65%,#d8eee9);padding:60px;border:1px solid #dce7f4;border-radius:24px;margin:12px 0 28px;position:relative}.eyebrow{font-size:12px;letter-spacing:2px;color:#2676bd;font-weight:800}h1{font-size:clamp(30px,4vw,48px);line-height:1.4;letter-spacing:-2px;margin:16px 0}h2{font-size:26px;line-height:1.5;letter-spacing:-.8px}h3{font-size:16px;margin:0 0 16px}p{color:#566a81}.tags{font-size:12px;letter-spacing:3px;color:#287e88;margin-top:28px}nav{display:flex;gap:12px;flex-wrap:wrap;padding:10px 0 25px}nav a{background:white;border:1px solid #dfe7f1;padding:10px 18px;border-radius:30px;font-size:13px}section:not(.hero){background:white;border:1px solid #e0e8f2;border-radius:20px;padding:36px;margin:0 0 24px;scroll-margin-top:20px}.cards,.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.cards article,.metrics article{background:#f4f8fd;border:1px solid #e2eaf5;border-radius:12px;padding:20px}.cards p{font-size:14px;margin-bottom:0}.flow{display:flex;gap:12px;flex-wrap:wrap}.flow span{background:#eaf3ff;border-radius:10px;padding:15px;font-size:14px}.note{font-size:13px;color:#6b7d91}.lab{display:grid;grid-template-columns:280px minmax(0,1fr);gap:28px;margin-top:25px}.controls{border-right:1px solid #e1e9f3;padding-right:24px}label{display:block;font-size:13px;color:#536980}input,select{display:block;width:100%;padding:10px;border:1px solid #cdd9e7;border-radius:8px;margin:6px 0 12px;font:inherit;background:white;color:#20334c}button{font:inherit;font-size:13px;background:#1769c5;color:white;border:0;border-radius:8px;padding:11px 17px;cursor:pointer}button:hover{filter:brightness(.94)}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible{outline:3px solid #17a398;outline-offset:3px}.controls form button,#fit{width:100%}.secondary{display:flex;gap:8px;margin-top:12px}.secondary button,#pause,#reset{background:#eaf1fa;color:#285d97}.table-wrap{max-height:240px;overflow:auto;margin:18px 0}table{width:100%;font-size:13px;border-collapse:collapse;text-align:left}caption{text-align:left;color:#6b7d91;margin-bottom:8px}th,td{border-bottom:1px solid #e3eaf2;padding:7px}td button{padding:2px 9px;background:#fceeed;color:#b84d45}.graph-head{display:flex;justify-content:space-between;flex-wrap:wrap}.graph-head span{font-size:12px;color:#1769c5}em{font-style:normal;color:#16a08b;margin-left:10px}svg{width:100%;height:auto;display:block;background:#fbfdff;border-radius:12px}svg text{font-family:inherit;font-size:12px;fill:#667a91}.prediction{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:16px}.prediction input{width:140px;margin-bottom:0}.prediction output{font-weight:800;color:#1769c5}.callout{background:#eff7fc;border-left:3px solid #2193b0;padding:18px;font-size:14px;margin-top:25px}.next{display:inline-block;margin-top:22px;font-weight:700}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar label{display:flex;align-items:center;gap:10px}.toolbar select{width:100px;margin:0}.metrics{grid-template-columns:repeat(4,1fr);margin:24px 0}.metrics article{font-size:12px}.metrics strong{display:block;font-size:25px;color:#1769c5;font-variant-numeric:tabular-nums}.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}.steps{grid-template-columns:repeat(4,1fr);margin-top:24px}.steps article{padding:16px}.steps b{font-size:13px}.steps p{font-size:12px;overflow-wrap:anywhere}footer{font-size:12px;color:#6b7d91}#dataMessage,#trainingStatus{font-size:13px}@media(max-width:800px){.lab,.charts{grid-template-columns:1fr}.controls{border-right:0;padding-right:0}.cards,.steps,.metrics{grid-template-columns:repeat(2,1fr)}section:not(.hero){padding:24px}.hero{padding:32px}main{padding:0 14px}}@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}@media(max-width:420px){.cards{grid-template-columns:1fr}.metrics article{padding:12px}.metrics strong{font-size:21px}header{padding:18px}.brand small{display:none}}
+/* Shared page chrome and lesson cards come from styles.css, as on the math page. */
+.ml-hero-grid { overflow: hidden; }
+.ml-hero-grid svg { width: 100%; height: 100%; display: block; }
+.ml-hero-axes { fill: none; stroke: #ffffff36; stroke-width: 1; }
+.ml-hero-trend { fill: none; stroke: #a2e5ff; stroke-width: 3; stroke-linecap: round; }
+.ml-hero-points { fill: #fff; stroke: #267ac6; stroke-width: 2; }
+
+.lesson-content .section-index { min-width: 27px; width: auto; padding: 0 5px; }
+.lesson-content .section-title-row .card-kicker { display: block; margin-bottom: 5px; font-size: 10px; }
+.ml-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ml-card-title { color: #496986; font: 700 15px 'Gowun Dodum', sans-serif; }
+.ml-cards .concept-card p, .ml-steps .concept-card p { margin-bottom: 0; }
+.ml-flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ml-flow > span { padding: 15px; border: 1px solid #e5eef9; border-radius: 9px; background: #f3f8ff; color: #4c7ba7; font: 600 13px/1.6 'Gowun Dodum', sans-serif; }
+.ml-note { margin: 15px 0 0; color: #8191a5; font: 400 13px/1.8 'Gowun Dodum', sans-serif; overflow-wrap: anywhere; }
+.ml-lab { display: grid; grid-template-columns: minmax(230px, .68fr) minmax(0, 1.32fr); align-items: start; gap: 16px; }
+.ml-panel { min-width: 0; padding: 18px; border: 1px solid #e3ebf5; border-radius: 11px; background: #fbfdff; }
+.ml-panel h4 { margin: 0 0 15px; color: #526880; font: 700 16px/1.6 'Gowun Dodum', sans-serif; }
+.ml-lab label, .ml-toolbar label { display: block; color: #718198; font: 400 13px/1.7 'Gowun Dodum', sans-serif; }
+.ml-lab input, .ml-toolbar select { display: block; width: 100%; min-width: 0; min-height: 42px; margin: 6px 0 12px; padding: 9px 10px; border: 1px solid #dce6f1; border-radius: 8px; background: #fff; color: #48617c; font: 500 14px 'DM Sans', 'Gowun Dodum', sans-serif; }
+.ml-lab input:focus-visible, .ml-toolbar select:focus-visible { outline: 3px solid #80b6ff; outline-offset: 2px; }
+.ml-lab .button, .ml-toolbar .button { white-space: normal; line-height: 1.6; }
+.ml-controls form .button, #fit { width: 100%; }
+.ml-secondary { display: flex; gap: 8px; margin-top: 10px; }
+.ml-secondary .button { flex: 1; padding-right: 8px; padding-left: 8px; }
+.ml-table-wrap { max-height: 248px; overflow: auto; margin: 18px 0; }
+.ml-table-wrap table { width: 100%; border-collapse: collapse; color: #718198; text-align: left; font: 400 12px/1.7 'Gowun Dodum', sans-serif; }
+.ml-table-wrap caption { margin-bottom: 8px; color: #8191a5; text-align: left; }
+.ml-table-wrap th, .ml-table-wrap td { padding: 8px 6px; border-bottom: 1px solid #e7edf5; white-space: nowrap; }
+.ml-table-wrap th { color: #526982; font-weight: 700; }
+.ml-table-wrap td button { min-width: 30px; min-height: 30px; padding: 2px 8px; border: 1px solid #f1dfdf; border-radius: 7px; background: #fff4f3; color: #b7645e; cursor: pointer; }
+.ml-graph-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 6px 12px; margin-bottom: 12px; }
+.ml-graph-head h4 { margin: 0; }
+.ml-graph-head > span { color: #347fcf; font: 500 11px/1.8 'Gowun Dodum', sans-serif; }
+.ml-graph-head em { margin-left: 8px; color: #42a98f; font-style: normal; }
+.ml-chart { width: 100%; height: auto; display: block; border: 1px solid #edf2f7; border-radius: 9px; background: #fff; }
+.ml-chart text { fill: #71859c; font: 500 13px 'DM Sans', 'Gowun Dodum', sans-serif; }
+.ml-prediction { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin-top: 16px; }
+.ml-prediction label { flex: 1 1 150px; }
+.ml-prediction input { margin-bottom: 0; }
+.ml-prediction output { flex: 1 1 100%; min-height: 38px; padding: 10px 12px; border-radius: 8px; background: #eef5ff; color: #3478b7; font: 700 13px/1.7 'Gowun Dodum', sans-serif; overflow-wrap: anywhere; }
+.ml-next { display: inline-flex; margin-top: 18px; color: var(--blue); font: 700 13px/1.7 'Gowun Dodum', sans-serif; }
+.ml-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ml-toolbar label { display: flex; align-items: center; gap: 9px; }
+.ml-toolbar select { width: 105px; margin: 0; }
+.ml-toolbar .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+#dataMessage, #trainingStatus { margin: 12px 0 0; color: #718198; font: 400 12px/1.8 'Gowun Dodum', sans-serif; overflow-wrap: anywhere; }
+.ml-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
+.ml-metrics .concept-card { padding: 14px; color: #8191a5; font: 500 12px/1.6 'Gowun Dodum', sans-serif; }
+.ml-metrics strong { display: block; margin-top: 6px; color: var(--blue); font: 700 clamp(18px, 2vw, 25px)/1.4 Manrope, sans-serif; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.ml-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ml-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.ml-steps .ml-card-title { font-size: 13px; }
+.ml-steps .concept-card p { font-size: 12px; overflow-wrap: anywhere; }
+
+@media (max-width: 1100px) {
+  .ml-cards, .ml-lab, .ml-charts { grid-template-columns: minmax(0, 1fr); }
+  .ml-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ml-panel { padding: 15px; }
+}
+@media (max-width: 720px) {
+  .ml-card-title, .ml-panel h4 { font-size: 14px; }
+  .ml-note, .ml-flow > span { font-size: 11px; }
+  .ml-flow > span { padding: 12px; }
+  .ml-panel { padding: 13px; }
+  .ml-lab label, .ml-toolbar label { font-size: 12px; }
+  .ml-lab input, .ml-toolbar select { min-height: 44px; font-size: 13px; }
+  .ml-table-wrap table { font-size: 12px; }
+  .ml-table-wrap td button { min-width: 40px; min-height: 40px; }
+  .ml-prediction output, .ml-next { font-size: 12px; }
+  .ml-toolbar label { flex-basis: 100%; }
+  .ml-metrics .concept-card { padding: 12px; font-size: 11px; }
+  .ml-steps { grid-template-columns: minmax(0, 1fr); }
+  .ml-steps .ml-card-title { font-size: 12px; }
+  .ml-steps .concept-card p { font-size: 11px; }
+  #dataMessage, #trainingStatus { font-size: 11px; }
+}
+@media (max-width: 390px) {
+  .ml-flow { grid-template-columns: minmax(0, 1fr); }
+}
