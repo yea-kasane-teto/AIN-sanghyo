@@ -1,4 +1,8 @@
 (() => {
+  if (['ml', 'machine-learning'].includes(new URLSearchParams(window.location.search).get('module'))) {
+    window.location.replace('./machine-learning.html' + window.location.hash);
+    return;
+  }
   const moduleRegistry = { math: '필수 수학' };
   const requestedModule = new URLSearchParams(window.location.search).get('module') || 'math';
   const pageRoot = document.querySelector('.learning-app');

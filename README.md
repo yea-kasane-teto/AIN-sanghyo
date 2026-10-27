@@ -1,5 +1,14 @@
 # AIN — 필수 수학
 
+## 머신러닝 실습
+
+- `machine-learning.html`: 개념 설명과 공부 시간 → 시험점수 선형회귀 실습
+- `machine-learning.css`, `machine-learning.js`: 반응형 화면, 최소제곱법 예측 및 경사하강법 학습 애니메이션
+- 공개 주소: https://yea-kasane-teto.github.io/AIN-sanghyo/machine-learning.html
+- 기존 호출 방식과 동일하게 `?module=ml` 또는 `?module=machine-learning`으로도 이동할 수 있습니다.
+- 03-1과 03-2는 같은 데이터를 사용하며, 데이터 변경 시 기존 모델을 초기화합니다. 입력 데이터는 브라우저 로컬 저장소에 보관됩니다.
+- 검증: `node verify-ml.cjs`
+
 AIN 학습 로드맵의 **필수 수학** 영역을 위한 독립형 정적 페이지입니다. 벡터 내적과 경사하강법을 직접 바꿔보며 벡터·행렬·텐서·미분·확률의 기초를 익힙니다.
 
 ## 로컬에서 열기

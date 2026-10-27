@@ -1,0 +1,21 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const html = fs.readFileSync('machine-learning.html', 'utf8');
+const ids = [...html.matchAll(/id="([^"]+)"/g)].map(m => m[1]);
+assert.equal(new Set(ids).size, ids.length, 'HTML IDs must be unique');
+const nodes = Object.fromEntries(ids.map(id => [id, {value: '', textContent:'', innerHTML:'', listeners:{}, disabled:false, addEventListener(type, fn){this.listeners[type]=fn;},checkValidity(){return this.value!=='' && Number(this.value)>=0 && Number(this.value)<=24;}}]));
+nodes.hours.value='6';nodes.score.value='85';nodes.predictHours.value='5';nodes.speed.value='70';
+let pending=null, stored=null;
+vm.runInNewContext(fs.readFileSync('machine-learning.js','utf8'), {document:{getElementById:id=>{assert.ok(nodes[id],id);return nodes[id];}},localStorage:{getItem:()=>null,setItem:(_,v)=>stored=v},setTimeout:fn=>{pending=fn;return 1;},clearTimeout:()=>pending=null,console});
+const submit=id=>nodes[id].listeners.submit({preventDefault(){}});
+nodes.fit.onclick();assert.match(nodes.fitFormula.textContent,/8.900/);assert.match(nodes.prediction.textContent,/75.8/);
+submit('dataForm');assert.equal(JSON.parse(stored).length,6);assert.match(nodes.stepData.textContent,/6개/);assert.match(nodes.prediction.textContent,/다시 학습/);
+nodes.start.onclick();let previous=Number(nodes.loss.textContent),iterations=0;
+while(pending && iterations++<5000){const run=pending;pending=null;run();const current=Number(nodes.loss.textContent);assert.ok(current<=previous+.001,'loss should decrease');previous=current;}
+assert.ok(previous<10,'regression should converge');assert.ok(Number(nodes.weight.textContent)>8);assert.match(nodes.trainingGraph.innerHTML,/<line/);assert.match(nodes.lossGraph.innerHTML,/<polyline/);
+nodes.reset.onclick();assert.equal(nodes.epoch.textContent,0);nodes.start.onclick();nodes.pause.onclick();assert.equal(pending,null);assert.match(nodes.trainingStatus.textContent,/일시정지/);
+nodes.clear.onclick();assert.match(nodes.stepData.textContent,/추가/);nodes.start.onclick();assert.match(nodes.trainingStatus.textContent,/2개 이상/);
+nodes.hours.value='3';nodes.score.value='50';submit('dataForm');submit('dataForm');nodes.fit.onclick();assert.match(nodes.dataMessage.textContent,/서로 다른/);
+nodes.example.onclick();nodes.fit.onclick();nodes.predictHours.value='24';nodes.predictForm.onsubmit({preventDefault(){}});assert.match(nodes.prediction.textContent,/학습 범위 밖/);assert.match(nodes.prediction.textContent,/점수 범위/);
+console.log('PASS: least squares, prediction, shared data, loss convergence, pause/reset, empty/constant inputs, extrapolation');
