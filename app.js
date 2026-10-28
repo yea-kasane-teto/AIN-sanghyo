@@ -1,6 +1,11 @@
 (() => {
-  if (['ml', 'machine-learning'].includes(new URLSearchParams(window.location.search).get('module'))) {
+  const moduleRoute = new URLSearchParams(window.location.search).get('module');
+  if (['ml', 'machine-learning'].includes(moduleRoute)) {
     window.location.replace('./machine-learning.html' + window.location.hash);
+    return;
+  }
+  if (['dl', 'deep-learning'].includes(moduleRoute)) {
+    window.location.replace('./deep-learning.html' + window.location.hash);
     return;
   }
   const moduleRegistry = { math: '필수 수학' };

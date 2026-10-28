@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko" data-module="dl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1769c5" />
+  <meta name="description" content="신경망의 층, 활성화, 순전파와 역전파 등 딥러닝의 핵심 원리를 직접 조작하며 배워요." />
+  <title>딥러닝 | AIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Gowun+Dodum&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=dl-layout-20261028" />
+  <link rel="stylesheet" href="./deep-learning.css?v=dl-layout-20261028" />
+</head>
+<body>
+  <div class="learning-app" id="top">
+    <header class="topbar">
+      <a class="brand" href="https://yea-kasane-teto.github.io/AIN-main/" aria-label="AIN 메인 화면으로 이동"><img class="brand-logo" src="./%ED%8C%8C%EB%9E%80%EC%83%89%20AIN%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EB%A1%9C%EA%B3%A0.png" alt="AIN 로고" width="90" height="58" /><span class="brand-copy"><strong>AIN</strong><small>AI에 들어가다</small></span></a>
+      <label class="search-wrap" for="Search-bar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"></circle><path d="m15.4 15.4 4.2 4.2"></path></svg>
+        <input id="Search-bar" type="search" placeholder="딥러닝 내용 검색" aria-label="딥러닝 내용 검색" autocomplete="off" /><kbd>/</kbd>
+      </label>
+      <a class="home-link" href="https://yea-kasane-teto.github.io/AIN-main/" aria-label="AIN 메인 화면으로 이동">AIN 메인 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section class="course-hero" aria-labelledby="courseTitle">
+        <div class="course-hero-copy">
+          <div class="hero-eyebrow"><span></span> AI LEARNING AREA · 04</div>
+          <h1 id="courseTitle">딥러닝</h1>
+          <p>신경망은 층을 거치며 표현을 만들고, 결과의 오차를 거슬러 가중치를 조정해요.<br class="desktop-break" /> 눈에 보이지 않는 신호의 흐름을 직접 살펴보세요.</p>
+          <div class="hero-tags" aria-label="학습 주제"><span>LAYERS</span><span aria-hidden="true">→</span><span>SIGNALS</span><span aria-hidden="true">→</span><span>LEARNING</span></div>
+        </div>
+        <div class="math-illustration dl-hero-illustration" aria-hidden="true">
+          <div class="math-orbit orbit-one"></div><div class="math-orbit orbit-two"></div>
+          <svg class="dl-hero-network" viewBox="0 0 360 230" focusable="false">
+            <g class="hero-connections"><path d="M64 72 151 48M64 72 151 91M64 72 151 136M64 158 151 48M64 158 151 91M64 158 151 136M207 48 294 72M207 91 294 72M207 136 294 72M207 48 294 158M207 91 294 158M207 136 294 158" /></g>
+            <g class="hero-neurons"><circle cx="64" cy="72" r="15"/><circle cx="64" cy="158" r="15"/><circle cx="151" cy="48" r="15"/><circle cx="151" cy="91" r="15"/><circle cx="151" cy="136" r="15"/><circle cx="207" cy="48" r="15"/><circle cx="207" cy="91" r="15"/><circle cx="207" cy="136" r="15"/><circle cx="294" cy="72" r="15"/><circle cx="294" cy="158" r="15"/></g>
+            <text x="64" y="204">입력</text><text x="178" y="204">은닉층</text><text x="294" y="204">출력</text>
+          </svg>
+          <span class="hero-float float-top">NEURAL NETWORK</span><span class="hero-float float-bottom">층을 따라 흐르는 신호</span>
+          <span class="hero-sparkle sparkle-one">✳</span><span class="hero-sparkle sparkle-two">✦</span>
+        </div>
+      </section>
+      <div class="course-overview">
+        <div class="overview-title"><span class="unit-code">DL · 01</span><span class="overview-divider"></span><span>신경망이 표현을 배우는 방식</span></div>
+        <div class="progress-summary"><span id="progressLabel">학습 진행도</span><div class="progress-track" id="progressTrack" role="progressbar" aria-label="딥러닝 학습 진행도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressFill"></span></div><strong id="progressPercent">0%</strong></div>
+      </div>
+      <div class="course-layout">
+        <aside class="course-sidebar" aria-label="딥러닝 목차">
+          <div class="sidebar-heading"><span>딥러닝 목차</span><small>DL</small></div>
+          <nav class="lesson-nav" id="lessonNavigation">
+            <a href="#network" data-nav-section="network"><span class="nav-number">01</span><span>층으로 표현하기</span></a>
+            <a href="#activation" data-nav-section="activation"><span class="nav-number">02</span><span>활성화와 표현력</span></a>
+            <a href="#forward" data-nav-section="forward"><span class="nav-number">03</span><span>순전파</span></a>
+            <a href="#backprop" data-nav-section="backprop"><span class="nav-number">04</span><span>역전파</span></a>
+            <a href="#stability" data-nav-section="stability"><span class="nav-number">05</span><span>깊은 층의 안정화</span></a>
+          </nav>
+          <div class="sidebar-note"><span class="note-icon" aria-hidden="true">✳</span><p>신경망 안에서 <strong>신호가 바뀌는 과정</strong>을 조작해 보세요.</p></div>
+        </aside>
+        <article class="lesson-content" id="lessonContent">
+          <header class="lesson-heading"><span class="eyebrow">DL-01 · 네 번째 학습 영역</span><h2>층을 쌓아 표현을 만들고,<br class="desktop-break" /> 오차를 따라 고쳐요</h2><p>직접 신경망을 움직이며 딥러닝의 핵심 원리를 알아봐요.</p></header>
+          <section class="lesson-section" id="network" data-searchable aria-labelledby="networkTitle">
+            <div class="section-title-row"><span class="section-index">01</span><div><span class="card-kicker">01 · LAYERS</span><h3 id="networkTitle">층을 쌓아 신경망의 표현을 만들어요</h3><p>각 층은 앞 층에서 받은 신호를 새 표현으로 바꿔 다음 층에 전달해요. 여러 층을 거치며 간단한 표현을 조합해 더 복잡한 특징을 나타낼 수 있어요.</p></div></div>
+            <div class="dl-lab dl-architecture-lab">
+              <div class="dl-panel dl-control-panel">
+                <h4>신경망 구조 바꾸기</h4>
+                <label class="dl-range-label" for="depthControl"><span>은닉층 수</span><output id="depthValue">3층</output></label>
+                <input id="depthControl" type="range" min="1" max="6" step="1" value="3" />
+                <label class="dl-range-label" for="widthControl"><span>층마다 뉴런 수</span><output id="widthValue">4개</output></label>
+                <input id="widthControl" type="range" min="2" max="5" step="1" value="4" />
+                <div class="dl-stat-row"><span>전체 은닉 뉴런</span><strong id="neuronCount">12개</strong></div>
+                <div class="dl-stat-row"><span>층 사이 연결</span><strong id="connectionCount">64개</strong></div>
+              </div>
+              <div class="dl-panel dl-visual-panel">
+                <div class="dl-panel-heading"><h4>입력층 → 은닉층 → 출력층</h4><span class="dl-badge">구조 보기</span></div>
+                <svg id="architectureGraph" class="dl-network-svg" viewBox="0 0 760 280" role="img" aria-label="은닉층 수와 뉴런 수를 조절하는 신경망 구조"></svg>
+                <p class="dl-caption" id="architectureCaption">은닉층 3개와 층별 뉴런 4개로 구성된 신경망이에요.</p>
+              </div>
+            </div>
+            <div class="dl-concept-grid">
+              <article class="concept-card"><strong class="dl-card-title">입력층</strong><p>이미지나 문장처럼 모델이 살펴볼 자료를 받아요.</p></article>
+              <article class="concept-card"><strong class="dl-card-title">은닉층</strong><p>앞 층의 신호를 조합해 다음 단계에 쓸 표현을 만들어요.</p></article>
+              <article class="concept-card"><strong class="dl-card-title">출력층</strong><p>층을 모두 지난 신호를 결과로 내보내요.</p></article>
+            </div>
+          </section>
+          <section class="lesson-section" id="activation" data-searchable aria-labelledby="activationTitle">
+            <div class="section-title-row"><span class="section-index">02</span><div><span class="card-kicker">02 · ACTIVATION</span><h3 id="activationTitle">활성화가 층마다 다른 표현을 가능하게 해요</h3><p>뉴런은 받은 신호를 활성화 함수에 통과시켜 다음 층에 보낼 값을 만들어요. 비선형 활성화가 있어야 층을 쌓았을 때 단순한 변환을 넘어 더 복잡한 관계를 표현할 수 있어요.</p></div></div>
+            <div class="dl-lab dl-activation-lab">
+              <div class="dl-panel dl-control-panel">
+                <h4>뉴런의 활성화 바꾸기</h4>
+                <label for="activationSelect">활성화 함수</label>
+                <select id="activationSelect"><option value="relu">ReLU</option><option value="sigmoid">Sigmoid</option><option value="tanh">Tanh</option></select>
+                <label class="dl-range-label" for="activationInput"><span>뉴런에 들어온 신호</span><output id="activationInputValue">1.0</output></label>
+                <input id="activationInput" type="range" min="-5" max="5" step="0.1" value="1" />
+                <div class="dl-activation-readout"><span id="activationName">ReLU 출력</span><strong id="activationOutput">1.00</strong></div>
+                <p class="dl-caption" id="activationDescription">음수 신호는 0으로, 양수 신호는 그대로 전달해요.</p>
+              </div>
+              <div class="dl-panel dl-visual-panel">
+                <div class="dl-panel-heading"><h4>입력 신호에 따른 뉴런 출력</h4><span class="dl-badge">활성화 곡선</span></div>
+                <svg id="activationGraph" class="dl-activation-svg" viewBox="0 0 520 260" role="img" aria-label="선택한 활성화 함수의 입력과 출력 관계"></svg>
+                <p class="dl-caption">점이 현재 입력 위치예요. 함수를 바꾸고 입력 신호를 움직여 보세요.</p>
+              </div>
+            </div>
+          </section>
+          <section class="lesson-section" id="forward" data-searchable aria-labelledby="forwardTitle">
+            <div class="section-title-row"><span class="section-index">03</span><div><span class="card-kicker">03 · FORWARD PASS</span><h3 id="forwardTitle">순전파로 입력이 결과가 돼요</h3><p>입력층의 값은 은닉층을 차례로 통과하고, 각 뉴런에서 변환된 뒤 출력층까지 이동해요. 아래 예시는 작은 신경망을 통과하는 신호를 실시간으로 보여줘요.</p></div></div>
+            <div class="dl-lab dl-forward-lab">
+              <div class="dl-panel dl-control-panel">
+                <h4>입력 신호 조절하기</h4>
+                <label class="dl-range-label" for="inputA"><span>특징 A</span><output id="inputAValue">0.7</output></label>
+                <input id="inputA" type="range" min="0" max="1" step="0.01" value="0.7" />
+                <label class="dl-range-label" for="inputB"><span>특징 B</span><output id="inputBValue">0.3</output></label>
+                <input id="inputB" type="range" min="0" max="1" step="0.01" value="0.3" />
+                <div class="dl-output-card"><span>마지막 층의 출력</span><strong id="forwardOutput">—</strong><small id="forwardInterpretation">입력을 바꾸면 신호가 다시 계산돼요.</small></div>
+              </div>
+              <div class="dl-panel dl-visual-panel">
+                <div class="dl-panel-heading"><h4>층을 지나가는 신호</h4><span class="dl-badge">입력 → 은닉 → 출력</span></div>
+                <svg id="forwardGraph" class="dl-network-svg dl-forward-svg" viewBox="0 0 760 300" role="img" aria-label="두 입력 뉴런, 세 은닉 뉴런, 한 출력 뉴런의 순전파"></svg>
+                <div id="forwardDetails" class="dl-layer-readout" aria-live="polite"></div>
+              </div>
+            </div>
+            <p class="dl-note"><strong>읽는 법:</strong> 노드 안의 숫자는 해당 층에서 만들어진 출력값이에요. 밝은 선은 다음 뉴런에 신호를 전달하는 연결을 나타내요. 이 예시는 원리를 보기 위한 작은 고정 신경망이에요.</p>
+          </section>
+          <section class="lesson-section" id="backprop" data-searchable aria-labelledby="backpropTitle">
+            <div class="section-title-row"><span class="section-index">04</span><div><span class="card-kicker">04 · BACKPROPAGATION</span><h3 id="backpropTitle">역전파는 결과의 오차를 거꾸로 전달해요</h3><p>출력과 목표가 다르면, 역전파는 그 차이를 만든 연결을 출력층에서 앞쪽 층으로 거슬러 살펴봐요. 각 가중치가 결과에 끼친 영향을 계산해 신경망의 어느 부분을 어떻게 고칠지 알려줘요.</p></div></div>
+            <div class="dl-lab dl-backprop-lab">
+              <div class="dl-panel dl-control-panel">
+                <h4>작은 신경망 한 번 고치기</h4>
+                <label class="dl-range-label" for="backpropA"><span>입력 특징 A</span><output id="backpropAValue">0.8</output></label>
+                <input id="backpropA" type="range" min="0" max="1" step="0.01" value="0.8" />
+                <label class="dl-range-label" for="backpropB"><span>입력 특징 B</span><output id="backpropBValue">0.2</output></label>
+                <input id="backpropB" type="range" min="0" max="1" step="0.01" value="0.2" />
+                <label for="backpropTarget">원하는 출력</label>
+                <select id="backpropTarget"><option value="1">신호 있음</option><option value="0">신호 없음</option></select>
+                <div class="dl-button-row"><button class="button button-primary" id="backpropStep" type="button">오차를 거슬러 한 번 고치기</button><button class="button button-secondary" id="backpropReset" type="button">초기 상태</button></div>
+              </div>
+              <div class="dl-panel dl-visual-panel">
+                <div class="dl-panel-heading"><h4>출력층에서 앞쪽 층으로</h4><span class="dl-badge">가중치 수정 <strong id="backpropSteps">0회</strong></span></div>
+                <svg id="backpropGraph" class="dl-network-svg dl-backprop-svg" viewBox="0 0 760 300" role="img" aria-label="역전파로 출력 오차가 은닉 뉴런과 연결 가중치에 전달되는 신경망"></svg>
+                <div class="dl-backprop-readout" id="backpropReadout" aria-live="polite"></div>
+                <p class="dl-caption" id="backpropMessage">버튼을 눌러 오차가 연결을 따라 거꾸로 전달되는 모습을 살펴보세요.</p>
+              </div>
+            </div>
+            <div class="dl-note"><strong>핵심:</strong> 역전파는 층마다 따로 추측해 고치는 대신, 최종 오차에서 시작해 각 연결의 몫을 계산해요. 아래 그림에서 강조된 선은 이번 수정에서 더 큰 영향을 받은 연결이에요.</div>
+          </section>
+          <section class="lesson-section" id="stability" data-searchable aria-labelledby="stabilityTitle">
+            <div class="section-title-row"><span class="section-index">05</span><div><span class="card-kicker">05 · DEEP NETWORKS</span><h3 id="stabilityTitle">층이 깊어질수록 학습 신호를 잘 지켜야 해요</h3><p>오차를 뒤로 전달할 때 층마다 신호가 약해지면 앞쪽 층이 충분히 배우지 못할 수 있어요. 이를 기울기 소실이라고 불러요. 활성화 함수의 선택과 일부 뉴런을 잠시 쉬게 하는 Dropout은 깊은 신경망의 학습을 돕는 대표 아이디어예요.</p></div></div>
+            <div class="dl-stability-grid">
+              <div class="dl-panel dl-control-panel">
+                <div class="dl-panel-heading"><h4>깊이에 따른 신호 크기</h4><span class="dl-badge">단순화한 예시</span></div>
+                <label for="gradientActivation">활성화 함수</label>
+                <select id="gradientActivation"><option value="sigmoid">Sigmoid · 약한 신호가 이어지는 예</option><option value="tanh">Tanh · 신호가 줄어드는 예</option><option value="relu">ReLU · 양수 신호가 이어지는 예</option></select>
+                <label class="dl-range-label" for="gradientDepth"><span>거치는 층</span><output id="gradientDepthValue">8층</output></label>
+                <input id="gradientDepth" type="range" min="1" max="16" step="1" value="8" />
+                <div class="dl-gradient-meter"><div class="dl-gradient-track"><span id="gradientFill"></span></div><strong id="gradientPercent">—</strong></div>
+                <p class="dl-caption" id="gradientExplanation">각 층이 일정한 비율의 신호를 전달한다고 가정한 비교예요.</p>
+              </div>
+              <div class="dl-panel dl-control-panel dl-dropout-panel">
+                <div class="dl-panel-heading"><h4>Dropout으로 뉴런 잠시 쉬게 하기</h4><span class="dl-badge">은닉층에만 적용</span></div>
+                <label class="dl-range-label" for="dropoutRate"><span>쉬게 할 비율</span><output id="dropoutRateValue">30%</output></label>
+                <input id="dropoutRate" type="range" min="0" max="60" step="5" value="30" />
+                <svg id="dropoutGraph" class="dl-network-svg dl-dropout-svg" viewBox="0 0 520 210" role="img" aria-label="Dropout 비율에 따라 학습 중 잠시 비활성화되는 은닉 뉴런"></svg>
+                <div class="dl-dropout-readout"><span>이번 단계에 활동 중인 은닉 뉴런</span><strong id="dropoutActive">—</strong></div>
+                <button class="button button-secondary" id="dropoutResample" type="button">다른 뉴런 쉬게 하기</button>
+                <p class="dl-caption">Dropout은 학습할 때 일부 은닉 뉴런을 무작위로 쉬게 해요. 한 뉴런에만 지나치게 기대지 않도록 돕고, 입력층과 출력층은 계속 작동해요.</p>
+              </div>
+            </div>
+            <div class="completion-row"><p>신경망의 구조와 신호 흐름을 모두 살펴봤다면 학습 완료로 표시할 수 있어요.</p><button class="button button-secondary" id="completeLesson" type="button" aria-pressed="false">이 차시 학습 완료</button></div>
+          </section>
+        </article>
+      </div>
+      <div class="search-empty" id="searchEmpty" hidden><strong>검색 결과가 없어요.</strong><span>다른 단어로 다시 찾아보세요.</span></div>
+    </main>
+    <footer class="site-footer"><a class="footer-brand" href="#top">AIN <span>AI LEARNING AREA</span></a><span>층을 쌓아 배우는 신경망의 원리</span><a class="back-to-top" href="#top">맨 위로 ↑</a></footer>
+  </div>
+  <script src="./deep-learning.js?v=dl-layout-20261028"></script>
+</body>
+</html>

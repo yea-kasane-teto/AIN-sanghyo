@@ -1,0 +1,87 @@
+﻿.dl-hero-illustration { width: min(100%, 410px); height: 260px; }
+.dl-hero-network { width: 100%; overflow: visible; }
+.dl-hero-network .hero-connections { fill: none; stroke: #ffffff69; stroke-width: 2; }
+.dl-hero-network .hero-neurons circle { fill: #ffffffeb; stroke: #83c2ff; stroke-width: 3; }
+.dl-hero-network .hero-neurons circle:nth-child(3n) { fill: #bce7ff; }
+.dl-hero-network text { fill: #dcefff; font: 600 12px 'Gowun Dodum', sans-serif; text-anchor: middle; }
+.dl-lab { display: grid; grid-template-columns: minmax(190px, .68fr) minmax(0, 1.32fr); gap: 13px; }
+.dl-panel { min-width: 0; padding: 17px; border: 1px solid #e3ebf5; border-radius: 11px; background: #fff; }
+.dl-control-panel { display: grid; align-content: start; gap: 10px; background: #fbfdff; }
+.dl-panel h4 { margin: 0; color: #526880; font: 700 12px 'Gowun Dodum', sans-serif; }
+.dl-control-panel label { color: #708198; font: 600 10px 'Gowun Dodum', sans-serif; }
+.dl-control-panel select { width: 100%; min-height: 36px; padding: 7px 10px; border: 1px solid #e2eaf3; border-radius: 8px; background: #fff; color: #48617c; font-size: 11px; }
+.dl-control-panel input[type=range] { width: 100%; margin: 0 0 7px; accent-color: #287bd0; }
+.dl-range-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; }
+.dl-range-label output { color: #347fcf; font: 700 10px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-stat-row { display: flex; justify-content: space-between; gap: 10px; padding-top: 9px; border-top: 1px solid #e9eff6; color: #8292a6; font: 400 9px 'Gowun Dodum', sans-serif; }
+.dl-stat-row strong { color: #4f7196; font: 700 10px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.dl-badge { flex: 0 0 auto; padding: 6px 8px; border-radius: 6px; background: #eef5ff; color: #5c8abe; font: 700 8px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-badge strong { color: #287bd0; }
+.dl-network-svg { width: 100%; height: auto; min-height: 190px; display: block; overflow: visible; border: 1px solid #edf2f8; border-radius: 9px; background: linear-gradient(135deg, #fbfdff, #f7faff); }
+.dl-network-edge { stroke: #9eb7d1; stroke-width: 1.5; opacity: .5; transition: opacity .2s, stroke-width .2s, stroke .2s; }
+.dl-network-edge.is-active { stroke: #3485e8; opacity: .85; }
+.dl-network-edge.is-negative { stroke: #ec9c6b; }
+.dl-network-edge.is-gradient { stroke: #16a08b; opacity: .9; }
+.dl-network-edge.is-disabled { opacity: .12; }
+.dl-neuron { fill: #fff; stroke: #8fb7df; stroke-width: 2; }
+.dl-neuron--input { fill: #eef6ff; stroke: #619bd5; }
+.dl-neuron--hidden { fill: #f2f8ff; stroke: #70a9dc; }
+.dl-neuron--output { fill: #eaf8f5; stroke: #4daa96; }
+.dl-neuron--inactive { fill: #eef0f3; stroke: #bec7d1; opacity: .62; }
+.dl-neuron-value { fill: #496987; font: 700 10px Manrope, 'Gowun Dodum', sans-serif; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.dl-neuron-caption { fill: #7b8da3; font: 600 10px 'Gowun Dodum', sans-serif; text-anchor: middle; }
+.dl-layer-caption { fill: #91a1b4; font: 600 9px 'Gowun Dodum', sans-serif; text-anchor: middle; }
+.dl-caption { margin: 10px 0 0; color: #8998aa; font: 400 9px/1.75 'Gowun Dodum', sans-serif; word-break: keep-all; }
+.dl-concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.dl-card-title { display: block; color: #4678ad; font: 700 12px 'Gowun Dodum', sans-serif; }
+.dl-concept-grid .concept-card p { margin-bottom: 0; }
+.dl-activation-readout, .dl-output-card { display: grid; gap: 5px; margin-top: 4px; padding: 13px; border: 1px solid #e5eef9; border-radius: 9px; background: linear-gradient(115deg, #f3f8ff, #fbfdff); }
+.dl-activation-readout span, .dl-output-card span { color: #8395aa; font: 500 9px 'Gowun Dodum', sans-serif; }
+.dl-activation-readout strong, .dl-output-card strong { color: #3477b7; font: 700 21px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-output-card small { color: #8494a8; font: 400 9px/1.6 'Gowun Dodum', sans-serif; }
+.dl-activation-svg { width: 100%; height: auto; display: block; border: 1px solid #edf2f8; border-radius: 9px; background: #fbfdff; }
+.dl-chart-grid { stroke: #e8eef6; stroke-width: 1; }
+.dl-chart-axis { stroke: #9aacc0; stroke-width: 1.2; }
+.dl-chart-tick { fill: #8c9bad; font: 9px Manrope, 'Gowun Dodum', sans-serif; text-anchor: middle; }
+.dl-chart-path { fill: none; stroke: #287bd0; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.dl-chart-marker { fill: #fff; stroke: #ec9c6b; stroke-width: 3; }
+.dl-layer-readout { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+.dl-value-chip { padding: 6px 8px; border: 1px solid #e7eef7; border-radius: 7px; background: #fff; color: #8292a6; font: 500 9px 'Gowun Dodum', sans-serif; }
+.dl-value-chip strong { color: #397bb8; font: 700 9px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-note { margin-top: 12px; padding: 12px 14px; border-left: 3px solid #76aee5; border-radius: 0 8px 8px 0; background: #f4f8fe; color: #78899f; font: 400 9px/1.8 'Gowun Dodum', sans-serif; word-break: keep-all; }
+.dl-note strong { color: #4e7ca9; }
+.dl-button-row { display: grid; gap: 7px; margin-top: 5px; }
+.dl-button-row .button { width: 100%; min-height: 39px; padding: 8px 10px; font-size: 10px; }
+.dl-backprop-readout { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.dl-gradient-meter { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.dl-gradient-track { height: 13px; flex: 1; overflow: hidden; border-radius: 999px; background: #e9eff6; }
+.dl-gradient-track span { width: 100%; height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #56bd9c, #3588d7); transition: width .25s ease; }
+.dl-gradient-meter strong { min-width: 42px; color: #397bb8; font: 700 10px Manrope, sans-serif; text-align: right; }
+.dl-stability-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.dl-dropout-panel { gap: 9px; }
+.dl-dropout-svg { min-height: 145px; }
+.dl-dropout-readout { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 7px; color: #8292a6; font: 400 9px 'Gowun Dodum', sans-serif; }
+.dl-dropout-readout strong { color: #397bb8; font: 700 10px Manrope, 'Gowun Dodum', sans-serif; }
+.dl-dropout-panel .button { justify-self: start; min-height: 34px; padding: 7px 11px; font-size: 9px; }
+
+@media (max-width: 900px) {
+  .dl-stability-grid { grid-template-columns: 1fr; }
+  .dl-lab { grid-template-columns: minmax(180px, .75fr) minmax(0, 1.25fr); }
+}
+@media (max-width: 680px) {
+  .dl-hero-illustration { width: min(100%, 360px); height: 210px; }
+  .dl-lab, .dl-stability-grid { grid-template-columns: 1fr; }
+  .dl-concept-grid { grid-template-columns: 1fr; }
+  .dl-network-svg { min-height: 150px; }
+  .dl-forward-svg, .dl-backprop-svg { min-width: 540px; }
+  #forwardGraph, #backpropGraph { overflow: auto; }
+  .dl-visual-panel { overflow-x: auto; }
+  .dl-activation-svg { min-width: 420px; }
+  .dl-visual-panel:has(.dl-activation-svg) { overflow-x: auto; }
+  .dl-panel { padding: 14px; }
+  .dl-button-row { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dl-network-edge, .dl-gradient-track span { transition: none; }
+}
