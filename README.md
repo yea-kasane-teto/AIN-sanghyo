@@ -29,3 +29,14 @@ AIN 학습 로드맵의 **필수 수학** 영역을 위한 독립형 정적 페�
 3. Actions의 **Deploy to GitHub Pages** workflow가 성공하면 다음 주소에서 열 수 있습니다: [필수 수학 페이지](https://yea-kasane-teto.github.io/AIN-sanghyo/?module=math)
 
 AIN 메인 페이지의 필수 수학 카드는 이 주소를 열도록 [PR](https://github.com/yea-kasane-teto/AIN-main/pull/1)에 연결 변경을 올렸습니다. 페이지가 배포된 뒤 PR을 병합하면 메인 페이지에서 이동할 수 있습니다.
+
+
+## 딥러닝 개념 수업
+
+- `deep-learning.html`: 신경망·활성화·순전파·손실 함수·경사하강법·역전파·배치와 최적화·기울기 안정화·과적합의 9개 단원입니다.
+- 설명과 계산 예시는 항상 표시하고, 7개의 보조 실험은 ‘개념 확인’을 펼쳐 사용합니다.
+- `deep-learning.css`, `deep-learning.js`: 공통 학습 레이아웃 위의 본문 스타일과 계산 도구입니다. 외부 라이브러리나 빌드 과정 없이 파일을 직접 열어도 작동합니다.
+- 메인에서 같은 탭으로 `?module=dl` 또는 `?module=deep-learning`을 열면 `deep-learning.html`로 이동합니다.
+- 공개 주소: https://yea-kasane-teto.github.io/AIN-sanghyo/deep-learning.html
+- 계산 가정: 순전파는 고정 파라미터, 역전파 실험은 Tanh/Sigmoid와 반제곱 오차 및 학습률 0.7, 경사하강법 실험은 J(w)=½(w−1)²를 사용합니다. 기울기 흐름 실험은 가중치가 1이고 각 층의 활성화 전 값이 같은 단일 경로를 가정합니다.
+- Dropout 그림은 마스크와 학습/추론 모드만 시각화하며 모델 성능을 측정하지 않습니다. 학습 진행도는 `ain-progress:dl-01`에 별도로 저장합니다.

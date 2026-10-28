@@ -2,16 +2,9 @@
   'use strict';
 
   const $ = id => document.getElementById(id);
-  const NS = 'http://www.w3.org/2000/svg';
   const sections = [...document.querySelectorAll('[data-searchable]')];
   const navLinks = [...document.querySelectorAll('[data-nav-section]')];
-  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
   const fmt = (value, digits = 2) => Number.isFinite(value) ? value.toFixed(digits) : '0.00';
-  const svgEl = (tag, attrs = {}) => {
-    const node = document.createElementNS(NS, tag);
-    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, String(value)));
-    return node;
-  };
 
   function valueY(count, top, bottom) {
     if (count === 1) return [((top + bottom) / 2)];
@@ -108,7 +101,7 @@
   function drawSmallNetwork(svg, layers, layerLabels, values, weights, options = {}) {
     const xPositions = [84, 380, 676];
     const yLayers = [valueY(layers[0], 102, 198), valueY(layers[1], 66, 234), valueY(layers[2], 150, 150)];
-    const parts = ['<defs><marker id="backwardArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a08b"/></marker></defs>'];
+    const parts = [`<defs><marker id="${svg.id}-backwardArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a08b"/></marker></defs>`];
     for (let layer = 0; layer < 2; layer += 1) {
       yLayers[layer].forEach((y1, from) => yLayers[layer + 1].forEach((y2, to) => {
         const weight = weights[layer][to][from];
@@ -116,11 +109,13 @@
         const gradient = options.gradients?.[layer]?.[to]?.[from] || 0;
         const classes = ['dl-network-edge', active ? 'is-active' : '', weight < 0 ? 'is-negative' : '', options.gradients ? 'is-gradient' : ''].filter(Boolean).join(' ');
         const width = options.gradients ? 1.1 + Math.min(3, Math.abs(gradient) * 24) : 1.1 + Math.min(2.2, Math.abs(weight));
-        parts.push(`<line class="${classes}" x1="${xPositions[layer]}" y1="${y1}" x2="${xPositions[layer + 1]}" y2="${y2}" stroke-width="${width}"/>`);
+        parts.push(`<line class="${classes}" x1="${xPositions[layer]}" y1="${y1}" x2="${xPositions[layer + 1]}" y2="${y2}" style="stroke-width:${width}"/>`);
       }));
     }
     if (options.backward) {
-      yLayers[2].forEach(y2 => yLayers[1].forEach(y1 => parts.push(`<path d="M ${xPositions[2] - 24} ${y2 - 7} Q ${(xPositions[1] + xPositions[2]) / 2} ${(y1 + y2) / 2 - 8} ${xPositions[1] + 24} ${y1 - 7}" fill="none" stroke="#16a08b" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#backwardArrow)" opacity=".72"/>`)));
+      for (let layer = 2; layer > 0; layer -= 1) {
+        yLayers[layer].forEach(y2 => yLayers[layer - 1].forEach(y1 => parts.push(`<path d="M ${xPositions[layer] - 24} ${y2 - 7} Q ${(xPositions[layer - 1] + xPositions[layer]) / 2} ${(y1 + y2) / 2 - 8} ${xPositions[layer - 1] + 24} ${y1 - 7}" fill="none" stroke="#16a08b" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#${svg.id}-backwardArrow)" opacity=".72"/>`)));
+      }
     }
     yLayers.forEach((ys, layer) => {
       ys.forEach((y, index) => {
@@ -135,14 +130,14 @@
 
   function updateForward() {
     const input = [Number($('inputA').value), Number($('inputB').value)];
-    const activationName = $('activationSelect').value;
+    const activationName = $('forwardActivation').value;
     const result = runForward(input, activationName);
     const weights = [forwardWeights, [forwardOutputWeights]];
     drawSmallNetwork($('forwardGraph'), [2, 3, 1], ['입력층', '은닉층', '출력층'], [result.input, result.hidden, [result.output]], weights);
     $('inputAValue').textContent = fmt(input[0], 2);
     $('inputBValue').textContent = fmt(input[1], 2);
-    $('forwardOutput').textContent = `${(result.output * 100).toFixed(1)}%`;
-    $('forwardInterpretation').textContent = result.output >= 0.5 ? '이 고정 예시에서는 높은 출력 신호가 나타났어요.' : '이 고정 예시에서는 낮은 출력 신호가 나타났어요.';
+    $('forwardOutput').textContent = fmt(result.output, 4);
+    $('forwardInterpretation').textContent = '고정 파라미터로 계산한 출력이에요. 학습된 확률이나 정확도가 아니에요.';
     $('forwardDetails').innerHTML = `<span class="dl-value-chip">입력층 <strong>${result.input.map(v => fmt(v)).join(' · ')}</strong></span><span class="dl-value-chip">은닉층 <strong>${result.hidden.map(v => fmt(v)).join(' · ')}</strong></span><span class="dl-value-chip">출력층 <strong>${fmt(result.output)}</strong></span>`;
   }
 
@@ -163,12 +158,14 @@
     const input = [Number($('backpropA').value), Number($('backpropB').value)];
     const result = backpropForward(input);
     const target = Number($('backpropTarget').value);
+    const loss = 0.5 * (result.output - target) ** 2;
     const weights = [backpropModel.w1, [backpropModel.w2]];
-    drawSmallNetwork($('backpropGraph'), [2, 2, 1], ['입력층', '은닉층', '출력층'], [input, result.hidden, [result.output]], weights, { backward: true, gradients: lastGradients });
+    drawSmallNetwork($('backpropGraph'), [2, 2, 1], ['입력층', '은닉층 · Tanh', '출력층 · Sigmoid'], [input, result.hidden, [result.output]], weights, { backward: true, gradients: lastGradients });
     $('backpropAValue').textContent = fmt(input[0], 2);
     $('backpropBValue').textContent = fmt(input[1], 2);
     $('backpropSteps').textContent = `${backpropSteps}회`;
-    $('backpropReadout').innerHTML = `<span class="dl-value-chip">현재 출력 <strong>${fmt(result.output)}</strong></span><span class="dl-value-chip">목표 <strong>${target === 1 ? '신호 있음' : '신호 없음'}</strong></span><span class="dl-value-chip">차이 <strong>${fmt(Math.abs(target - result.output))}</strong></span>`;
+    $('backpropReadout').innerHTML = `<span class="dl-value-chip">현재 출력 <strong>${fmt(result.output, 4)}</strong></span><span class="dl-value-chip">목표 <strong>${target}</strong></span><span class="dl-value-chip">손실 L <strong data-backprop-loss="${loss}">${fmt(loss, 6)}</strong></span>`;
+    if (lastGradients) $('backpropReadout').insertAdjacentHTML('beforeend', `<span class="dl-value-chip">직전 ∂L/∂w₁₁ <strong>${fmt(lastGradients[0][0][0], 6)}</strong></span>`);
   }
 
   function doBackpropStep() {
@@ -187,31 +184,34 @@
     lastGradients = [gradW1, [gradW2]];
     backpropSteps += 1;
     const after = backpropForward(input);
-    const oldDifference = Math.abs(target - before.output);
-    const newDifference = Math.abs(target - after.output);
+    const oldLoss = 0.5 * (before.output - target) ** 2;
+    const newLoss = 0.5 * (after.output - target) ** 2;
     updateBackprop();
-    $('backpropMessage').textContent = `수정 전 출력 ${fmt(before.output)} → 수정 후 ${fmt(after.output)} · 목표와의 차이 ${fmt(oldDifference)} → ${fmt(newDifference)}. 강조된 연결은 이번 수정에서 계산된 몫을 보여줘요.`;
+    $('backpropMessage').textContent = `η = 0.7로 업데이트했어요. 손실 ${fmt(oldLoss, 6)} → ${fmt(newLoss, 6)}. 첫 은닉 가중치 w₁₁의 기울기 ${fmt(gradW1[0][0], 6)}, 변화량 ${fmt(-learningStep * gradW1[0][0], 6)}. 그림의 선은 업데이트 전 기울기, 노드는 업데이트 후 출력이에요.`;
   }
 
   function resetBackprop() {
     backpropModel = freshBackpropModel();
     backpropSteps = 0;
     lastGradients = null;
-    $('backpropMessage').textContent = '초기 가중치로 돌아왔어요. 입력과 목표를 바꿔 다시 살펴보세요.';
+    $('backpropMessage').textContent = '초기 가중치로 돌아왔어요. η = 0.7, L = ½(출력 − 목표)²로 학습해요.';
     updateBackprop();
   }
 
   function updateGradientFlow() {
     const depth = Number($('gradientDepth').value);
     const name = $('gradientActivation').value;
-    const factor = name === 'relu' ? 1 : name === 'tanh' ? 0.55 : 0.25;
-    const percent = 100 * Math.pow(factor, depth);
+    const z = Number($('gradientSignal').value);
+    const activation = activate(name, z);
+    const derivative = name === 'relu' ? (z > 0 ? 1 : 0) : name === 'tanh' ? 1 - activation ** 2 : activation * (1 - activation);
+    const ratio = derivative ** depth;
+    const percent = 100 * ratio;
+    const precise = value => value !== 0 && Math.abs(value) < 0.001 ? value.toExponential(3) : fmt(value, 4);
     $('gradientDepthValue').textContent = `${depth}층`;
-    $('gradientFill').style.width = `${Math.max(percent > 0 ? 1 : 0, Math.min(100, percent))}%`;
-    $('gradientPercent').textContent = percent < 0.001 ? '<0.001%' : `${percent.toFixed(percent < 1 ? 3 : 1)}%`;
-    $('gradientExplanation').textContent = name === 'relu'
-      ? `양수 경로를 따라가면 이 예시에서는 층마다 신호가 유지돼요. 입력이 음수인 ReLU 뉴런은 신호가 막힐 수 있어요.`
-      : `단순 비교를 위해 층마다 ${Math.round(factor * 100)}%가 전달된다고 가정했어요. 층이 늘면 앞쪽으로 도달하는 신호가 빠르게 작아져요.`;
+    $('gradientSignalValue').textContent = fmt(z, 1);
+    $('gradientFill').style.width = `${percent}%`;
+    $('gradientPercent').textContent = `${precise(percent)}%`;
+    $('gradientExplanation').textContent = `각 층의 f′(${fmt(z, 1)}) = ${precise(derivative)}. 미분의 곱 [f′(z)]^${depth} = ${precise(ratio)}예요. 가중치는 모두 1이고, 각 층의 z가 같도록 편향을 설정한 단일 경로의 계산이에요.${name === 'relu' && z === 0 ? ' ReLU는 0에서 미분 불가능하며, 이 구현은 미분값 0을 선택해요.' : ''}`;
   }
 
   let dropoutMask = null;
@@ -219,26 +219,63 @@
     const rate = Number($('dropoutRate').value) / 100;
     const hiddenCount = 10;
     if (newMask || !dropoutMask) dropoutMask = Array.from({ length: hiddenCount }, () => Math.random() >= rate);
+    const training = $('dropoutMode').value === 'train';
+    const mask = training ? dropoutMask : Array(hiddenCount).fill(true);
     const layers = [3, 5, 5, 2];
     const xs = [44, 188, 332, 476];
     const ys = layers.map(count => valueY(count, 42, 166));
     const parts = [];
     for (let layer = 0; layer < layers.length - 1; layer += 1) {
       ys[layer].forEach((y1, from) => ys[layer + 1].forEach((y2, to) => {
-        const sourceActive = layer === 1 ? dropoutMask[from] : layer === 2 ? dropoutMask[5 + from] : true;
-        const targetActive = layer + 1 === 1 ? dropoutMask[to] : layer + 1 === 2 ? dropoutMask[5 + to] : true;
+        const sourceActive = layer === 1 ? mask[from] : layer === 2 ? mask[5 + from] : true;
+        const targetActive = layer + 1 === 1 ? mask[to] : layer + 1 === 2 ? mask[5 + to] : true;
         parts.push(`<line class="dl-network-edge ${sourceActive && targetActive ? '' : 'is-disabled'}" x1="${xs[layer]}" y1="${y1}" x2="${xs[layer + 1]}" y2="${y2}"/>`);
       }));
     }
     ys.forEach((yValues, layer) => yValues.forEach((y, index) => {
-      const inactive = layer === 1 ? !dropoutMask[index] : layer === 2 ? !dropoutMask[5 + index] : false;
+      const inactive = layer === 1 ? !mask[index] : layer === 2 ? !mask[5 + index] : false;
       const type = layer === 0 ? 'input' : layer === layers.length - 1 ? 'output' : inactive ? 'inactive' : 'hidden';
       parts.push(`<circle class="dl-neuron dl-neuron--${type}" cx="${xs[layer]}" cy="${y}" r="12"/>`);
     }));
     $('dropoutGraph').innerHTML = parts.join('');
+    $('dropoutResample').disabled = !training;
+    $('dropoutRate').disabled = !training;
+    $('dropoutExplanation').textContent = training
+      ? `학습 모드: 각 은닉 출력이 ${Math.round(rate * 100)}% 확률로 0이 돼요. 살아남은 출력에는 1/(1−p) = ${fmt(1 / (1 - rate), 3)}배를 적용해요. 그림은 마스크만 표시해요.`
+      : '추론 모드: Dropout을 끄고 모든 출력을 그대로 사용해요. 학습 중에 이미 배율을 적용했으므로 추론 시 추가 배율은 없어요.';
     $('dropoutRateValue').textContent = `${Math.round(rate * 100)}%`;
-    $('dropoutActive').textContent = `${dropoutMask.filter(Boolean).length}/10개`;
-    $('dropoutGraph').setAttribute('aria-label', `Dropout ${Math.round(rate * 100)}퍼센트. 은닉 뉴런 10개 중 ${dropoutMask.filter(Boolean).length}개가 활동 중입니다.`);
+    $('dropoutActive').textContent = `${mask.filter(Boolean).length}/10개`;
+    $('dropoutGraph').setAttribute('aria-label', `${training ? '학습' : '추론'} 모드. Dropout 설정 ${Math.round(rate * 100)}퍼센트. 은닉 뉴런 10개 중 ${mask.filter(Boolean).length}개가 활동 중입니다.`);
+  }
+
+  let descentWeight = 3;
+  let descentSteps = 0;
+  let descentHistory = [];
+  function renderDescent() {
+    const loss = 0.5 * (descentWeight - 1) ** 2;
+    $('descentReadout').innerHTML = `<span class="dl-value-chip">스텝 <strong>${descentSteps}</strong></span><span class="dl-value-chip">w <strong>${fmt(descentWeight, 4)}</strong></span><span class="dl-value-chip">현재 기울기 <strong>${fmt(descentWeight - 1, 4)}</strong></span><span class="dl-value-chip">손실 J <strong>${fmt(loss, 6)}</strong></span>`;
+    $('descentHistory').innerHTML = descentHistory.map(row => `<li>${row}</li>`).join('');
+    $('descentHistory').start = Math.max(1, descentSteps - descentHistory.length + 1);
+    const stopped = Math.abs(descentWeight) >= 10000;
+    $('descentStep').disabled = stopped;
+    $('descentMessage').textContent = stopped ? '발산으로 |w|가 10,000 이상이 되어 이 예시의 반복을 멈췄어요. 학습률을 줄여 처음부터 비교해 보세요.' : `J(w) = ½(w − 1)²의 최솟값은 w = 1에서 0이에요. 현재 학습률 η = ${$('descentRate').value}. 최근 5회 계산을 표시해요.`;
+  }
+  function stepDescent() {
+    if (Math.abs(descentWeight) >= 10000) return;
+    const before = descentWeight;
+    const gradient = before - 1;
+    const rate = Number($('descentRate').value);
+    descentWeight = before - rate * gradient;
+    descentSteps += 1;
+    descentHistory.push(`w: ${fmt(before, 4)} − ${rate} × (${fmt(gradient, 4)}) = ${fmt(descentWeight, 4)} · J = ${fmt(0.5 * (descentWeight - 1) ** 2, 6)}`);
+    descentHistory = descentHistory.slice(-5);
+    renderDescent();
+  }
+  function resetDescent() {
+    descentWeight = 3;
+    descentSteps = 0;
+    descentHistory = [];
+    renderDescent();
   }
 
   function setComplete(isComplete = null) {
@@ -259,30 +296,39 @@
     $('completeLesson').setAttribute('aria-pressed', String(complete));
   }
 
+  const detailsBeforeSearch = new Map();
   function applySearch() {
     const query = $('Search-bar').value.trim().toLocaleLowerCase('ko');
+    const details = [...document.querySelectorAll('.dl-supplement')];
+    if (query && detailsBeforeSearch.size === 0) details.forEach(detail => detailsBeforeSearch.set(detail, detail.open));
     let visibleCount = 0;
     sections.forEach(section => {
       const matches = !query || section.textContent.toLocaleLowerCase('ko').includes(query);
       section.hidden = !matches;
       visibleCount += Number(matches);
     });
+    details.forEach(detail => {
+      if (query) detail.open = detail.textContent.toLocaleLowerCase('ko').includes(query);
+      else if (detailsBeforeSearch.has(detail)) detail.open = detailsBeforeSearch.get(detail);
+    });
+    if (!query) detailsBeforeSearch.clear();
     navLinks.forEach(link => {
-      const section = document.getElementById(link.dataset.navSection);
-      link.hidden = Boolean(query && section?.hidden);
+      link.hidden = Boolean(query && $(link.dataset.navSection)?.hidden);
     });
     $('searchEmpty').hidden = !query || visibleCount > 0;
     updateActiveSection();
   }
 
   function updateActiveSection() {
-    const readingLine = 155;
-    const current = [...sections].filter(section => !section.hidden && section.getBoundingClientRect().top <= readingLine).at(-1);
-    if (!current && window.scrollY < 100) {
-      navLinks.forEach(link => link.classList.toggle('is-active', link.dataset.navSection === 'network'));
-      return;
-    }
-    if (current) navLinks.forEach(link => link.classList.toggle('is-active', link.dataset.navSection === current.id));
+    const visible = sections.filter(section => !section.hidden);
+    const readingLine = Math.max(120, document.querySelector('.topbar').getBoundingClientRect().bottom + 24);
+    const current = visible.filter(section => section.getBoundingClientRect().top <= readingLine).at(-1) || visible[0];
+    navLinks.forEach(link => {
+      const active = link.dataset.navSection === current?.id;
+      link.classList.toggle('is-active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
   }
 
   let scrollQueued = false;
@@ -316,17 +362,22 @@
 
   $('depthControl').addEventListener('input', renderArchitecture);
   $('widthControl').addEventListener('input', renderArchitecture);
-  $('activationSelect').addEventListener('change', () => { renderActivation(); updateForward(); });
+  $('activationSelect').addEventListener('change', renderActivation);
+  $('forwardActivation').addEventListener('change', updateForward);
   $('activationInput').addEventListener('input', renderActivation);
   ['inputA', 'inputB'].forEach(id => $(id).addEventListener('input', updateForward));
   ['backpropA', 'backpropB', 'backpropTarget'].forEach(id => $(id).addEventListener('input', () => {
     lastGradients = null;
-    $('backpropMessage').textContent = '입력이나 목표가 바뀌었어요. 새 조건으로 오차를 거슬러 살펴보세요.';
+    $('backpropMessage').textContent = '입력이나 목표가 바뀌었어요. 현재 가중치는 유지돼요. 새 조건에서 역전파를 계산하거나 초기 상태로 되돌려 비교해 보세요.';
     updateBackprop();
   }));
   $('backpropStep').addEventListener('click', doBackpropStep);
   $('backpropReset').addEventListener('click', resetBackprop);
-  ['gradientDepth', 'gradientActivation'].forEach(id => $(id).addEventListener('input', updateGradientFlow));
+  ['gradientDepth', 'gradientActivation', 'gradientSignal'].forEach(id => $(id).addEventListener('input', updateGradientFlow));
+  $('dropoutMode').addEventListener('change', () => updateDropout());
+  $('descentRate').addEventListener('change', resetDescent);
+  $('descentStep').addEventListener('click', stepDescent);
+  $('descentReset').addEventListener('click', resetDescent);
   $('dropoutRate').addEventListener('input', () => updateDropout(true));
   $('dropoutResample').addEventListener('click', () => updateDropout(true));
   $('completeLesson').addEventListener('click', () => setComplete($('completeLesson').getAttribute('aria-pressed') !== 'true'));
@@ -338,4 +389,6 @@
   updateGradientFlow();
   updateDropout(true);
   setComplete();
+  renderDescent();
+  updateActiveSection();
 })();

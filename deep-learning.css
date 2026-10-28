@@ -85,3 +85,98 @@
 @media (prefers-reduced-motion: reduce) {
   .dl-network-edge, .dl-gradient-track span { transition: none; }
 }
+
+/* Concept-first lesson: the explanation remains visible; activities are optional. */
+.dl-prose { color: #42566d; font: 400 15px/1.95 'Gowun Dodum', sans-serif; overflow-wrap: anywhere; }
+.dl-prose > p { margin: 0 0 18px; }
+.dl-prose h4 { margin: 26px 0 10px; color: #274661; font-size: 18px; line-height: 1.65; }
+.dl-prose strong { color: #294d70; font-weight: 700; }
+.dl-prose > ul { padding-left: 23px; margin: 14px 0 22px; }
+.dl-prose > ul li { margin-bottom: 12px; }
+.dl-formula { margin: 16px 0; padding: 17px 20px; border: 1px solid #dce9f8; border-radius: 10px; background: #f4f8fe; }
+.dl-formula p { margin: 0; color: #245b8b; font: 600 15px/2 Manrope, 'Gowun Dodum', sans-serif; }
+.dl-formula small { display: block; margin-top: 8px; color: #5d738c; font-size: 13px; line-height: 1.8; }
+.dl-worked-example { margin: 22px 0; padding: 20px 23px; border-left: 3px solid #7cafe1; border-radius: 0 12px 12px 0; background: #f8fbff; }
+.dl-worked-example h4 { margin: 0 0 10px; font-size: 16px; color: #2670b5; }
+.dl-worked-example p { margin: 9px 0; }
+.dl-worked-example .dl-formula { background: #fff; }
+.dl-calculation { padding-left: 25px; font-variant-numeric: tabular-nums; }
+.dl-calculation li { margin: 7px 0; }
+.dl-table-wrap { max-width: 100%; margin: 20px 0 24px; overflow-x: auto; border: 1px solid #e2ebf4; border-radius: 11px; }
+.dl-table { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 14px; line-height: 1.85; text-align: left; }
+.dl-table caption { padding: 13px 16px; color: #426789; font-weight: 700; text-align: left; background: #f5f9fd; }
+.dl-table th, .dl-table td { padding: 14px 16px; border-top: 1px solid #e2ebf4; vertical-align: top; }
+.dl-table thead th { color: #536c85; background: #fbfdff; font-size: 13px; }
+.dl-table tbody th { width: 19%; color: #346da3; font-weight: 700; }
+.dl-table td { color: #4e637b; }
+.dl-table td:nth-child(2) { width: 32%; }
+.dl-supplement { margin: 24px 0; border: 1px solid #d9e5f2; border-radius: 12px; background: #fff; overflow: hidden; }
+.dl-supplement > summary { display: flex; align-items: center; gap: 12px; padding: 17px 18px; color: #476986; font-size: 14px; font-weight: 700; line-height: 1.65; list-style: none; cursor: pointer; background: #f6f9fd; }
+.dl-supplement > summary::-webkit-details-marker { display: none; }
+.dl-supplement-label { flex-shrink: 0; padding: 3px 8px; border-radius: 5px; background: #e7f0fc; color: #2168aa; font-size: 11px; }
+.dl-expand { margin-left: auto; font: 400 22px Manrope, sans-serif; transition: transform .15s; }
+.dl-supplement[open] .dl-expand { transform: rotate(45deg); }
+.dl-supplement[open] > summary { border-bottom: 1px solid #d9e5f2; }
+.dl-supplement-body { padding: 18px; }
+.dl-prose .dl-observe, .dl-prose .dl-takeaway { margin: 0 0 17px; font-size: 13px; line-height: 1.9; color: #526c84; }
+.dl-prose .dl-takeaway { margin: 18px 0 0; padding-left: 13px; border-left: 2px solid #b4cee8; }
+.dl-observe strong, .dl-takeaway strong { display: block; margin-bottom: 3px; }
+.dl-prose .dl-panel h4 { margin: 0; font-size: 14px; }
+.dl-control-panel label, .dl-range-label output, .dl-stat-row, .dl-stat-row strong { font-size: 12px; }
+.dl-control-panel select { font-size: 13px; min-height: 42px; }
+.dl-caption, .dl-prose .dl-caption { font-size: 12px; line-height: 1.85; color: #62778e; }
+.dl-activation-readout span, .dl-output-card span, .dl-output-card small, .dl-dropout-readout, .dl-dropout-readout strong { font-size: 12px; }
+.dl-value-chip, .dl-value-chip strong { font-size: 12px; line-height: 1.7; }
+.dl-panel-heading { flex-wrap: wrap; }
+.dl-badge { font-size: 10px; }
+.dl-button-row .button, .dl-dropout-panel .button { min-height: 42px; font-size: 12px; line-height: 1.6; }
+.dl-gradient-meter strong { font-size: 13px; }
+.dl-step-history { margin: 15px 0 0; padding-left: 24px; font: 500 12px/1.9 Manrope, 'Gowun Dodum', sans-serif; color: #546c84; }
+.dl-step-history li { padding: 8px 0; border-bottom: 1px solid #e9eff7; }
+.dl-training-loop { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 22px 0; padding: 0; list-style: none; counter-reset: training-step; }
+.dl-training-loop li { padding: 16px; border: 1px solid #dfebf7; border-radius: 10px; background: #f8fbff; counter-increment: training-step; }
+.dl-training-loop strong::before { content: counter(training-step, decimal-leading-zero) ' · '; color: #4f93d5; font-family: Manrope, sans-serif; }
+.dl-training-loop span { display: block; margin-top: 5px; font-size: 13px; }
+.dl-recap { padding: 22px; margin-top: 25px; border-radius: 12px; background: #edf5ff; border: 1px solid #d5e5f7; }
+.dl-recap h4 { margin: 0 0 12px; }
+.dl-recap p { margin: 10px 0 0; }
+.dl-prose .dl-source { font-size: 12px; color: #71849a; margin: 10px 0; }
+.dl-source a { color: #397bb8; text-decoration: underline; text-underline-offset: 3px; }
+.dl-supplement summary:focus-visible, .dl-table-wrap:focus-visible { outline: 3px solid #4c93dc; outline-offset: -3px; }
+.dl-prose button:disabled { opacity: .5; cursor: not-allowed; }
+.lesson-nav a[hidden], .lesson-section[hidden] { display: none; }
+.dl-prose .completion-row p { font-size: 13px; line-height: 1.9; }
+@media (min-width: 721px) {
+  html[data-module=dl] .course-sidebar { max-height: calc(100dvh - 140px); overflow-y: auto; scrollbar-width: thin; }
+  html[data-module=dl] .lesson-section { padding: 28px; margin-bottom: 24px; }
+}
+@media (max-width: 1100px) {
+  .dl-lab { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .dl-prose { font-size: 14px; line-height: 1.95; }
+  .dl-prose h4 { font-size: 16px; }
+  .dl-worked-example { padding: 16px; }
+  .dl-worked-example h4 { font-size: 15px; }
+  .dl-formula { padding: 13px; }
+  .dl-formula p { font-size: 13px; }
+  .dl-formula small { font-size: 12px; }
+  .dl-supplement > summary { gap: 8px; padding: 14px 12px; font-size: 13px; }
+  .dl-supplement-label { padding: 3px 5px; font-size: 10px; }
+  .dl-supplement-body { padding: 12px; }
+  .dl-training-loop { grid-template-columns: 1fr; }
+  .dl-button-row { grid-template-columns: 1fr; }
+  .dl-recap { padding: 16px; }
+  .dl-forward-svg, .dl-backprop-svg, .dl-activation-svg { min-width: 0; }
+  .dl-network-svg { min-height: 120px; }
+  .dl-neuron-value { font-size: 14px; }
+  .dl-layer-caption { font-size: 13px; }
+  .dl-chart-tick { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .dl-expand { transition: none; } }
+
+/* The shared document already reserves space for the sticky header. */
+html[data-module=dl] { scroll-padding-top: 116px; }
+html[data-module=dl] .lesson-section { scroll-margin-top: 8px; }
+.dl-hero-illustration .float-bottom { bottom: -16px; left: 80px; }
+@media (max-width: 720px) { html[data-module=dl] { scroll-padding-top: 94px; } }
